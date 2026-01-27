@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alertBackground"
+    android:keepScreenOn="true"
+    tools:context=".ui.AlertActivity">
+
+    <!-- Pulsing Alert Icon -->
+    <ImageView
+        android:id="@+id/ivAlertIcon"
+        android:layout_width="@dimen/alert_icon_size"
+        android:layout_height="@dimen/alert_icon_size"
+        android:layout_marginTop="@dimen/spacing_xxl"
+        android:src="@drawable/ic_fall_alert"
+        android:contentDescription="@string/alert_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/alertPrimary" />
+
+    <!-- Alert Title -->
+    <TextView
+        android:id="@+id/tvAlertTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:text="@string/alert_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/alert_title_size"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivAlertIcon" />
+
+    <!-- Device Info -->
+    <TextView
+        android:id="@+id/tvDeviceInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:textColor="@color/onBackgroundMuted"
+        android:textSize="@dimen/alert_device_size"
+        tools:text="Device: ESP32_01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAlertTitle" />
+
+    <!-- Timestamp -->
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:textColor="@color/onSurfaceMuted"
+        android:textSize="@dimen/text_body_medium"
+        tools:text="12:45 PM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDeviceInfo" />
+
+    <!-- Impact Data Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardImpactData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_lg"
+        android:layout_marginTop="@dimen/spacing_xl"
+        app:cardBackgroundColor="@color/alertSurface"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/cardBorder"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTimestamp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_md">
+
+            <!-- Impact G -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/impact_label"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_label" />
+
+                <TextView
+                    android:id="@+id/tvImpactG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_title_large"
+                    android:textStyle="bold"
+                    tools:text="3.05g" />
+            </LinearLayout>
+
+            <!-- Pitch -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pitch_label"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_label" />
+
+                <TextView
+                    android:id="@+id/tvPitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_title_large"
+                    android:textStyle="bold"
+                    tools:text="12.4°" />
+            </LinearLayout>
+
+            <!-- Roll -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/roll_label"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_label" />
+
+                <TextView
+                    android:id="@+id/tvRoll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_title_large"
+                    android:textStyle="bold"
+                    tools:text="5.1°" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Buttons Container -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_lg"
+        android:layout_marginBottom="@dimen/spacing_xxl"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- CALL EMERGENCY Button (Primary Action) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCall"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alert_button_height"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:text="@string/btn_call_emergency"
+            android:textSize="@dimen/alert_button_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/alertPrimary"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="@dimen/button_corner_radius"
+            app:icon="@drawable/ic_phone"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/spacing_md"
+            app:iconSize="32dp"
+            app:iconTint="@color/alertPrimary" />
+
+        <!-- I AM SAFE Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAcknowledge"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="@string/btn_acknowledge"
+            android:textSize="@dimen/text_body_large"
+            android:textColor="@color/statusOnline"
+            app:cornerRadius="@dimen/button_corner_radius"
+            app:icon="@drawable/ic_check"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/spacing_sm"
+            app:iconTint="@color/statusOnline"
+            app:strokeColor="@color/statusOnline"
+            app:strokeWidth="2dp" />
+
+        <!-- FALSE ALARM Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDismiss"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_medium"
+            android:text="@string/btn_dismiss"
+            android:textSize="@dimen/text_body_medium"
+            android:textColor="@color/onSurfaceMuted" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

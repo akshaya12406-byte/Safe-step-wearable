@@ -1,0 +1,9 @@
+{
+    "name": "safestep-test-harness",
+    "version": "1.0.0",
+    "description": "Test harness for SafeStep FCM testing (Firebase Spark compatible)",
+    "scripts": {
+        "test": "node send_fcm.js"
+    },
+    "dependencies": {}
+}

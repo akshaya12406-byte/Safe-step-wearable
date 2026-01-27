@@ -1,0 +1,30 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // SafeStep Firestore Security Rules (Firebase Spark Plan)
+    // 
+    // ARCHITECTURE:
+    // - ESP32 wearable writes events directly to Firestore (with device token)
+    // - Android app ONLY reads events (no write from app)
+    // - This is a prototype; production would use authenticated writes
+    
+    match /devices/{deviceId}/events/{eventId} {
+      // Allow reads from any authenticated or anonymous user (for caregiver app)
+      allow read: if true;
+      
+      // Allow creates only (events are immutable once created)
+      // In production, you would validate request.auth or a device secret
+      allow create: if true;
+      
+      // Disallow updates and deletes (events are immutable)
+      allow update, delete: if false;
+    }
+
+    match /devices/{deviceId}/meta/{docId} {
+      allow read: if true;
+      allow write: if true; // Device meta can be updated
+    }
+  }
+}

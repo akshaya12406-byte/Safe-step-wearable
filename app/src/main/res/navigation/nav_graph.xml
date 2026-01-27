@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Home Fragment (Dashboard) -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.safestep.app.ui.home.HomeFragment"
+        android:label="@string/nav_home"
+        tools:layout="@layout/fragment_home">
+        
+        <action
+            android:id="@+id/action_home_to_eventDetail"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
+
+    <!-- Events Fragment (History) -->
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.safestep.app.ui.events.EventsFragment"
+        android:label="@string/nav_events"
+        tools:layout="@layout/fragment_events">
+        
+        <action
+            android:id="@+id/action_events_to_eventDetail"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
+
+    <!-- Settings Fragment -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.safestep.app.ui.settings.SettingsFragment"
+        android:label="@string/nav_settings"
+        tools:layout="@layout/fragment_settings">
+        
+        <action
+            android:id="@+id/action_settings_to_pairing"
+            app:destination="@id/pairingFragment" />
+        
+        <action
+            android:id="@+id/action_settings_to_developer"
+            app:destination="@id/developerFragment" />
+    </fragment>
+
+    <!-- Event Detail Fragment -->
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.safestep.app.ui.events.EventDetailFragment"
+        android:label="@string/event_detail"
+        tools:layout="@layout/fragment_event_detail">
+        
+        <argument
+            android:name="eventId"
+            app:argType="string" />
+        
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+    </fragment>
+
+    <!-- Pairing Fragment -->
+    <fragment
+        android:id="@+id/pairingFragment"
+        android:name="com.safestep.app.ui.pairing.PairingFragment"
+        android:label="@string/pairing"
+        tools:layout="@layout/fragment_pairing" />
+
+    <!-- Developer Fragment (Hidden) -->
+    <fragment
+        android:id="@+id/developerFragment"
+        android:name="com.safestep.app.ui.developer.DeveloperFragment"
+        android:label="@string/developer_mode"
+        tools:layout="@layout/fragment_developer" />
+
+</navigation>

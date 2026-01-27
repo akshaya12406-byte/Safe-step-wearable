@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "com.safestep.app-debug-58:/layout_fragment_pairing.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/fragment_pairing.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_home.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/color_bottom_nav_color_selector.xml.flat",
+        "source": "com.safestep.app-main-60:/color/bottom_nav_color_selector.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_phone.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_phone.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_fragment_events.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/fragment_events.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.safestep.app-main-60:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_activity_alert.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/activity_alert.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.safestep.app-main-60:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_item_event.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/item_event.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_fragment_event_detail.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/fragment_event_detail.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_check.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_check.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.safestep.app-main-60:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_fragment_settings.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_activity_settings.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/xml_data_extraction_rules.xml.flat",
+        "source": "com.safestep.app-main-60:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_device.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_device.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_fall_alert.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_fall_alert.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/xml_backup_rules.xml.flat",
+        "source": "com.safestep.app-main-60:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_settings.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_activity_event_history.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/activity_event_history.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_fragment_home.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_activity_main.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_events.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_events.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/layout_fragment_developer.xml.flat",
+        "source": "com.safestep.app-main-60:/layout/fragment_developer.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_launcher_foreground.xml"
+    }
+]

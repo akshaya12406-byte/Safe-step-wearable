@@ -1,0 +1,114 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">SafeStep</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">SafeStep Dashboard</string>
+    <string name="devices_section">Your Devices</string>
+    <string name="primary_device">Primary Device</string>
+    <string name="view_all_devices">View All Devices</string>
+    <string name="recent_events">Recent Events</string>
+    <string name="view_all_events">View All</string>
+    <string name="no_devices">No devices paired</string>
+    <string name="reliability_title">System Reliability</string>
+    <string name="events_last_24h">Events (24h)</string>
+    <string name="uptime">Uptime</string>
+    <string name="last_sync">Last Sync</string>
+    
+    <!-- Device Status -->
+    <string name="status_online">Online</string>
+    <string name="status_warning">Warning</string>
+    <string name="status_offline">Offline</string>
+    <string name="status_unknown">Unknown</string>
+    <string name="battery_label">Battery</string>
+    <string name="last_seen_label">Last Seen</string>
+    <string name="firmware_label">Firmware</string>
+    
+    <!-- Alert Activity -->
+    <string name="alert_title">FALL DETECTED</string>
+    <string name="alert_subtitle">Emergency Alert</string>
+    <string name="btn_call_emergency">CALL EMERGENCY</string>
+    <string name="btn_acknowledge">I AM SAFE</string>
+    <string name="btn_dismiss">FALSE ALARM</string>
+    <string name="demo_mode_toast">📞 DEMO MODE: Would call %s</string>
+    <string name="call_permission_missing">Call permission missing, opening dialer.</string>
+    
+    <!-- Events -->
+    <string name="event_detail">Event Detail</string>
+    <string name="event_type_fall">Fall Detected</string>
+    <string name="event_type_impact">Impact Alert</string>
+    <string name="event_handled">Handled</string>
+    <string name="event_unhandled">Needs Attention</string>
+    <string name="no_events">No events recorded</string>
+    <string name="impact_label">Impact</string>
+    <string name="pitch_label">Pitch</string>
+    <string name="roll_label">Roll</string>
+    <string name="timestamp_label">Time</string>
+    <string name="mark_as_handled">Mark as Handled</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="emergency_contact_section">Emergency Contact</string>
+    <string name="emergency_number_label">Emergency Number</string>
+    <string name="emergency_number_hint">e.g. 911</string>
+    <string name="call_behavior_section">Call Behavior</string>
+    <string name="auto_call_label">Enable Auto-Call</string>
+    <string name="auto_call_description">Automatically call emergency contact when fall is confirmed. Requires CALL_PHONE permission.</string>
+    <string name="demo_mode_label">Demo Mode</string>
+    <string name="demo_mode_description">When enabled, CALL button shows toast instead of calling. Use during testing.</string>
+    <string name="device_section">Devices</string>
+    <string name="paired_devices">Paired Devices</string>
+    <string name="add_device">Add Device</string>
+    <string name="about_section">About</string>
+    <string name="version_label">Version</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="settings_saved">Settings saved</string>
+    
+    <!-- Pairing -->
+    <string name="pairing">Device Pairing</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="manual_entry">Manual Entry</string>
+    <string name="device_id_hint">Enter Device ID</string>
+    <string name="pair_device">Pair Device</string>
+    <string name="pairing_success">Device paired successfully</string>
+    <string name="pairing_failed">Pairing failed</string>
+    
+    <!-- Developer Mode -->
+    <string name="developer_mode">Developer Mode</string>
+    <string name="fcm_token">FCM Token</string>
+    <string name="copy_token">Copy Token</string>
+    <string name="token_copied">Token copied to clipboard</string>
+    <string name="simulate_event">Simulate Event</string>
+    <string name="send_test_notification">Send Test Notification</string>
+    <string name="show_raw_logs">Show Raw Logs</string>
+    <string name="dev_mode_enabled">Developer Mode enabled</string>
+    <string name="dev_mode_disabled">Developer Mode disabled</string>
+    <string name="enter_dev_pin">Enter Developer PIN</string>
+    <string name="invalid_pin">Invalid PIN</string>
+    
+    <!-- Auto-Call Consent Dialog -->
+    <string name="auto_call_consent_title">Enable Automatic Calling?</string>
+    <string name="auto_call_consent_message">When enabled, SafeStep will automatically call your emergency contact when a fall is detected.\n\nThis requires the CALL_PHONE permission and will initiate real phone calls.\n\nAre you sure you want to enable this feature?</string>
+    <string name="consent_enable">Enable</string>
+    <string name="consent_cancel">Cancel</string>
+    
+    <!-- Permissions -->
+    <string name="permission_call_title">Phone Call Permission</string>
+    <string name="permission_call_rationale">SafeStep needs permission to make emergency calls on your behalf when a fall is detected.</string>
+    <string name="permission_denied">Permission denied. Auto-call cannot be enabled.</string>
+    <string name="permission_granted">Permission granted. Auto-call enabled.</string>
+    
+    <!-- Misc -->
+    <string name="loading">Loading…</string>
+    <string name="error_generic">Something went wrong</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

@@ -1,0 +1,94 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    
+    <!-- Base Dark Theme (Default) -->
+    <style name="Theme.SafeStep" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        
+        <!-- Background and surface -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/bottomNavBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        
+        <!-- Default text appearance -->
+        <item name="android:textColor">@color/onBackground</item>
+    </style>
+    
+    <!-- Full Screen Alert Theme -->
+    <style name="Theme.SafeStep.Fullscreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:keepScreenOn">true</item>
+        <item name="android:colorBackground">@color/alertBackground</item>
+        <item name="android:statusBarColor">@color/alertPrimary</item>
+        <item name="android:navigationBarColor">@color/alertBackground</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <!-- Bottom Navigation Style -->
+    <style name="SafeStepBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:background">@color/bottomNavBackground</item>
+        <item name="itemIconTint">@color/bottom_nav_color_selector</item>
+        <item name="itemTextColor">@color/bottom_nav_color_selector</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+    
+    <!-- Card Style -->
+    <style name="SafeStepCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/cardBackground</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="strokeColor">@color/cardBorder</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    
+    <!-- Primary Button (Call) -->
+    <style name="SafeStepButtonPrimary" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_height">@dimen/alert_button_height</item>
+        <item name="android:textSize">@dimen/alert_button_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/buttonCall</item>
+        <item name="android:textColor">@color/buttonCallText</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+    </style>
+    
+    <!-- Secondary Button (Acknowledge) -->
+    <style name="SafeStepButtonSecondary" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">@dimen/text_body_large</item>
+        <item name="android:textColor">@color/onBackgroundMuted</item>
+    </style>
+    
+    <!-- Text Styles -->
+    <style name="SafeStepTextHeadline" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">@dimen/text_headline_large</item>
+        <item name="android:textColor">@color/onBackground</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="SafeStepTextTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">@dimen/text_title_large</item>
+        <item name="android:textColor">@color/onBackground</item>
+    </style>
+    
+    <style name="SafeStepTextBody" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/text_body_large</item>
+        <item name="android:textColor">@color/onBackgroundMuted</item>
+    </style>
+    
+    <style name="SafeStepTextLabel" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/text_label</item>
+        <item name="android:textColor">@color/onSurfaceMuted</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>
