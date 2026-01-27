@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="gcm_defaultSenderId" translatable="false">1044898985766</string>
-    <string name="google_api_key" translatable="false">AIzaSyAZwFonwGlQG4Nz-824KcbSScxPj4d6Oos</string>
-    <string name="google_app_id" translatable="false">1:1044898985766:android:c4ecaf3725959f8b41f3e7</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAZwFonwGlQG4Nz-824KcbSScxPj4d6Oos</string>
-    <string name="google_storage_bucket" translatable="false">safestep-leap.firebasestorage.app</string>
-    <string name="project_id" translatable="false">safestep-leap</string>
-</resources>
