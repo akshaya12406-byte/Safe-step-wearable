@@ -50,8 +50,9 @@ captures/
 .externalNativeBuild/
 .cxx/
 
-# Google Services (Uncomment if you don't want to share Firebase config)
-# app/google-services.json
+# Google Services - Contains Firebase project config
+app/google-services.json
+**/google-services.json
 
 # Freeline
 freeline.py
