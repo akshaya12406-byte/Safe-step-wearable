@@ -4,25 +4,47 @@ package com.safestep.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.safestep.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentDeveloperBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final ScrollView rootView;
 
-  private FragmentDeveloperBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final MaterialButton btnCopyToken;
+
+  @NonNull
+  public final MaterialButton btnSendTestNotification;
+
+  @NonNull
+  public final MaterialButton btnSimulateEvent;
+
+  @NonNull
+  public final TextView tvFcmToken;
+
+  private FragmentDeveloperBinding(@NonNull ScrollView rootView,
+      @NonNull MaterialButton btnCopyToken, @NonNull MaterialButton btnSendTestNotification,
+      @NonNull MaterialButton btnSimulateEvent, @NonNull TextView tvFcmToken) {
     this.rootView = rootView;
+    this.btnCopyToken = btnCopyToken;
+    this.btnSendTestNotification = btnSendTestNotification;
+    this.btnSimulateEvent = btnSimulateEvent;
+    this.tvFcmToken = tvFcmToken;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -43,10 +65,38 @@ public final class FragmentDeveloperBinding implements ViewBinding {
 
   @NonNull
   public static FragmentDeveloperBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btnCopyToken;
+      MaterialButton btnCopyToken = ViewBindings.findChildViewById(rootView, id);
+      if (btnCopyToken == null) {
+        break missingId;
+      }
 
-    return new FragmentDeveloperBinding((FrameLayout) rootView);
+      id = R.id.btnSendTestNotification;
+      MaterialButton btnSendTestNotification = ViewBindings.findChildViewById(rootView, id);
+      if (btnSendTestNotification == null) {
+        break missingId;
+      }
+
+      id = R.id.btnSimulateEvent;
+      MaterialButton btnSimulateEvent = ViewBindings.findChildViewById(rootView, id);
+      if (btnSimulateEvent == null) {
+        break missingId;
+      }
+
+      id = R.id.tvFcmToken;
+      TextView tvFcmToken = ViewBindings.findChildViewById(rootView, id);
+      if (tvFcmToken == null) {
+        break missingId;
+      }
+
+      return new FragmentDeveloperBinding((ScrollView) rootView, btnCopyToken,
+          btnSendTestNotification, btnSimulateEvent, tvFcmToken);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

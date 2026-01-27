@@ -4,25 +4,58 @@ package com.safestep.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.TextInputEditText;
 import com.safestep.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentSettingsBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final ScrollView rootView;
 
-  private FragmentSettingsBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final MaterialButton btnPairDevice;
+
+  @NonNull
+  public final MaterialButton btnSave;
+
+  @NonNull
+  public final TextInputEditText etEmergencyNumber;
+
+  @NonNull
+  public final SwitchMaterial switchAutoCall;
+
+  @NonNull
+  public final SwitchMaterial switchDemoMode;
+
+  @NonNull
+  public final TextView tvVersion;
+
+  private FragmentSettingsBinding(@NonNull ScrollView rootView,
+      @NonNull MaterialButton btnPairDevice, @NonNull MaterialButton btnSave,
+      @NonNull TextInputEditText etEmergencyNumber, @NonNull SwitchMaterial switchAutoCall,
+      @NonNull SwitchMaterial switchDemoMode, @NonNull TextView tvVersion) {
     this.rootView = rootView;
+    this.btnPairDevice = btnPairDevice;
+    this.btnSave = btnSave;
+    this.etEmergencyNumber = etEmergencyNumber;
+    this.switchAutoCall = switchAutoCall;
+    this.switchDemoMode = switchDemoMode;
+    this.tvVersion = tvVersion;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -43,10 +76,50 @@ public final class FragmentSettingsBinding implements ViewBinding {
 
   @NonNull
   public static FragmentSettingsBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btnPairDevice;
+      MaterialButton btnPairDevice = ViewBindings.findChildViewById(rootView, id);
+      if (btnPairDevice == null) {
+        break missingId;
+      }
 
-    return new FragmentSettingsBinding((FrameLayout) rootView);
+      id = R.id.btnSave;
+      MaterialButton btnSave = ViewBindings.findChildViewById(rootView, id);
+      if (btnSave == null) {
+        break missingId;
+      }
+
+      id = R.id.etEmergencyNumber;
+      TextInputEditText etEmergencyNumber = ViewBindings.findChildViewById(rootView, id);
+      if (etEmergencyNumber == null) {
+        break missingId;
+      }
+
+      id = R.id.switchAutoCall;
+      SwitchMaterial switchAutoCall = ViewBindings.findChildViewById(rootView, id);
+      if (switchAutoCall == null) {
+        break missingId;
+      }
+
+      id = R.id.switchDemoMode;
+      SwitchMaterial switchDemoMode = ViewBindings.findChildViewById(rootView, id);
+      if (switchDemoMode == null) {
+        break missingId;
+      }
+
+      id = R.id.tvVersion;
+      TextView tvVersion = ViewBindings.findChildViewById(rootView, id);
+      if (tvVersion == null) {
+        break missingId;
+      }
+
+      return new FragmentSettingsBinding((ScrollView) rootView, btnPairDevice, btnSave,
+          etEmergencyNumber, switchAutoCall, switchDemoMode, tvVersion);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

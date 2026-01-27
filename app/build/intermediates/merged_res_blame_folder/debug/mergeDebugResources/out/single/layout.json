@@ -1,46 +1,70 @@
 [
     {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/activity_alert.xml",
-        "source": "com.safestep.app-main-60:/layout/activity_alert.xml"
-    },
-    {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_settings.xml",
-        "source": "com.safestep.app-main-60:/layout/fragment_settings.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\fragment_events.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_events.xml"
     },
     {
         "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_developer.xml",
         "source": "com.safestep.app-main-60:/layout/fragment_developer.xml"
     },
     {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/activity_event_history.xml",
-        "source": "com.safestep.app-main-60:/layout/activity_event_history.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\fragment_pairing.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_pairing.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "com.safestep.app-mergeDebugResources-57:/layout/item_device_card.xml",
+        "source": "com.safestep.app-main-60:/layout/item_device_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\fragment_settings.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\activity_settings.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\activity_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\fragment_developer.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_developer.xml"
+    },
+    {
+        "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_settings.xml",
+        "source": "com.safestep.app-main-60:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\fragment_event_detail.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_event_detail.xml"
     },
     {
         "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_events.xml",
         "source": "com.safestep.app-main-60:/layout/fragment_events.xml"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\activity_alert.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\activity_alert.xml"
+    },
+    {
         "merged": "com.safestep.app-mergeDebugResources-57:/layout/item_event.xml",
         "source": "com.safestep.app-main-60:/layout/item_event.xml"
     },
     {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_pairing.xml",
-        "source": "com.safestep.app-main-60:/layout/fragment_pairing.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\activity_event_history.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\activity_event_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-mergeDebugResources-57:\\layout\\item_event.xml",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\item_event.xml"
     },
     {
         "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_home.xml",
         "source": "com.safestep.app-main-60:/layout/fragment_home.xml"
-    },
-    {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/activity_settings.xml",
-        "source": "com.safestep.app-main-60:/layout/activity_settings.xml"
-    },
-    {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/fragment_event_detail.xml",
-        "source": "com.safestep.app-main-60:/layout/fragment_event_detail.xml"
-    },
-    {
-        "merged": "com.safestep.app-mergeDebugResources-57:/layout/activity_main.xml",
-        "source": "com.safestep.app-main-60:/layout/activity_main.xml"
     }
 ]

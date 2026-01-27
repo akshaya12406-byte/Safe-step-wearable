@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_md"
+    android:layout_marginVertical="@dimen/spacing_sm"
+    app:cardBackgroundColor="@color/cardBackground"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    app:strokeColor="@color/cardBorder"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_md">
+
+        <!-- Status Indicator -->
+        <View
+            android:id="@+id/viewStatusIndicator"
+            android:layout_width="@dimen/device_status_indicator_size"
+            android:layout_height="@dimen/device_status_indicator_size"
+            android:background="@drawable/bg_status_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Device Icon -->
+        <ImageView
+            android:id="@+id/ivDeviceIcon"
+            android:layout_width="@dimen/device_card_icon_size"
+            android:layout_height="@dimen/device_card_icon_size"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:src="@drawable/ic_device"
+            android:contentDescription="Device"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewStatusIndicator"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Device Name -->
+        <TextView
+            android:id="@+id/tvDeviceName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/onBackground"
+            android:textSize="@dimen/text_title_medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvPrimaryBadge"
+            app:layout_constraintStart_toEndOf="@id/ivDeviceIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ESP32_01" />
+
+        <!-- Primary Badge -->
+        <TextView
+            android:id="@+id/tvPrimaryBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_primary_badge"
+            android:paddingHorizontal="@dimen/spacing_sm"
+            android:paddingVertical="@dimen/spacing_xs"
+            android:text="@string/primary_device"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="@dimen/text_label"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <!-- Status Text -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:textColor="@color/statusOnline"
+            android:textSize="@dimen/text_body_small"
+            app:layout_constraintStart_toEndOf="@id/ivDeviceIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvDeviceName"
+            tools:text="Online" />
+
+        <!-- Metrics Row -->
+        <LinearLayout
+            android:id="@+id/layoutMetrics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivDeviceIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvStatus">
+
+            <!-- Battery -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/battery_label"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_label" />
+
+                <TextView
+                    android:id="@+id/tvBattery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/onBackground"
+                    android:textSize="@dimen/text_body_medium"
+                    android:textStyle="bold"
+                    tools:text="85%" />
+            </LinearLayout>
+
+            <!-- Last Seen -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_seen_label"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_label" />
+
+                <TextView
+                    android:id="@+id/tvLastSeen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/onBackground"
+                    android:textSize="@dimen/text_body_medium"
+                    tools:text="2m ago" />
+            </LinearLayout>
+
+            <!-- Firmware -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/firmware_label"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_label" />
+
+                <TextView
+                    android:id="@+id/tvFirmware"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/onBackground"
+                    android:textSize="@dimen/text_body_medium"
+                    tools:text="v1.0.0" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

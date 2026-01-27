@@ -4,25 +4,43 @@ package com.safestep.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.safestep.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentEventsBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final SwipeRefreshLayout rootView;
 
-  private FragmentEventsBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final RecyclerView rvEvents;
+
+  @NonNull
+  public final SwipeRefreshLayout swipeRefresh;
+
+  @NonNull
+  public final TextView tvNoEvents;
+
+  private FragmentEventsBinding(@NonNull SwipeRefreshLayout rootView,
+      @NonNull RecyclerView rvEvents, @NonNull SwipeRefreshLayout swipeRefresh,
+      @NonNull TextView tvNoEvents) {
     this.rootView = rootView;
+    this.rvEvents = rvEvents;
+    this.swipeRefresh = swipeRefresh;
+    this.tvNoEvents = tvNoEvents;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public SwipeRefreshLayout getRoot() {
     return rootView;
   }
 
@@ -43,10 +61,28 @@ public final class FragmentEventsBinding implements ViewBinding {
 
   @NonNull
   public static FragmentEventsBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.rvEvents;
+      RecyclerView rvEvents = ViewBindings.findChildViewById(rootView, id);
+      if (rvEvents == null) {
+        break missingId;
+      }
 
-    return new FragmentEventsBinding((FrameLayout) rootView);
+      SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) rootView;
+
+      id = R.id.tvNoEvents;
+      TextView tvNoEvents = ViewBindings.findChildViewById(rootView, id);
+      if (tvNoEvents == null) {
+        break missingId;
+      }
+
+      return new FragmentEventsBinding((SwipeRefreshLayout) rootView, rvEvents, swipeRefresh,
+          tvNoEvents);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

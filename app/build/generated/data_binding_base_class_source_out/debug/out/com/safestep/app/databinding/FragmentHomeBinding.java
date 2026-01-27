@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.safestep.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -17,24 +20,68 @@ import java.lang.String;
 
 public final class FragmentHomeBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final SwipeRefreshLayout rootView;
 
   @NonNull
-  public final TextView tvPlaceholder;
+  public final MaterialButton btnAddDevice;
+
+  @NonNull
+  public final MaterialButton btnViewAllEvents;
+
+  @NonNull
+  public final MaterialCardView cardReliability;
+
+  @NonNull
+  public final RecyclerView rvDevices;
+
+  @NonNull
+  public final RecyclerView rvRecentEvents;
+
+  @NonNull
+  public final SwipeRefreshLayout swipeRefresh;
+
+  @NonNull
+  public final TextView tvEventsCount;
+
+  @NonNull
+  public final TextView tvLastSync;
+
+  @NonNull
+  public final TextView tvNoDevices;
+
+  @NonNull
+  public final TextView tvNoEvents;
 
   @NonNull
   public final TextView tvTitle;
 
-  private FragmentHomeBinding(@NonNull ConstraintLayout rootView, @NonNull TextView tvPlaceholder,
-      @NonNull TextView tvTitle) {
+  @NonNull
+  public final TextView tvUptime;
+
+  private FragmentHomeBinding(@NonNull SwipeRefreshLayout rootView,
+      @NonNull MaterialButton btnAddDevice, @NonNull MaterialButton btnViewAllEvents,
+      @NonNull MaterialCardView cardReliability, @NonNull RecyclerView rvDevices,
+      @NonNull RecyclerView rvRecentEvents, @NonNull SwipeRefreshLayout swipeRefresh,
+      @NonNull TextView tvEventsCount, @NonNull TextView tvLastSync, @NonNull TextView tvNoDevices,
+      @NonNull TextView tvNoEvents, @NonNull TextView tvTitle, @NonNull TextView tvUptime) {
     this.rootView = rootView;
-    this.tvPlaceholder = tvPlaceholder;
+    this.btnAddDevice = btnAddDevice;
+    this.btnViewAllEvents = btnViewAllEvents;
+    this.cardReliability = cardReliability;
+    this.rvDevices = rvDevices;
+    this.rvRecentEvents = rvRecentEvents;
+    this.swipeRefresh = swipeRefresh;
+    this.tvEventsCount = tvEventsCount;
+    this.tvLastSync = tvLastSync;
+    this.tvNoDevices = tvNoDevices;
+    this.tvNoEvents = tvNoEvents;
     this.tvTitle = tvTitle;
+    this.tvUptime = tvUptime;
   }
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public SwipeRefreshLayout getRoot() {
     return rootView;
   }
 
@@ -59,9 +106,59 @@ public final class FragmentHomeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.tvPlaceholder;
-      TextView tvPlaceholder = ViewBindings.findChildViewById(rootView, id);
-      if (tvPlaceholder == null) {
+      id = R.id.btnAddDevice;
+      MaterialButton btnAddDevice = ViewBindings.findChildViewById(rootView, id);
+      if (btnAddDevice == null) {
+        break missingId;
+      }
+
+      id = R.id.btnViewAllEvents;
+      MaterialButton btnViewAllEvents = ViewBindings.findChildViewById(rootView, id);
+      if (btnViewAllEvents == null) {
+        break missingId;
+      }
+
+      id = R.id.cardReliability;
+      MaterialCardView cardReliability = ViewBindings.findChildViewById(rootView, id);
+      if (cardReliability == null) {
+        break missingId;
+      }
+
+      id = R.id.rvDevices;
+      RecyclerView rvDevices = ViewBindings.findChildViewById(rootView, id);
+      if (rvDevices == null) {
+        break missingId;
+      }
+
+      id = R.id.rvRecentEvents;
+      RecyclerView rvRecentEvents = ViewBindings.findChildViewById(rootView, id);
+      if (rvRecentEvents == null) {
+        break missingId;
+      }
+
+      SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) rootView;
+
+      id = R.id.tvEventsCount;
+      TextView tvEventsCount = ViewBindings.findChildViewById(rootView, id);
+      if (tvEventsCount == null) {
+        break missingId;
+      }
+
+      id = R.id.tvLastSync;
+      TextView tvLastSync = ViewBindings.findChildViewById(rootView, id);
+      if (tvLastSync == null) {
+        break missingId;
+      }
+
+      id = R.id.tvNoDevices;
+      TextView tvNoDevices = ViewBindings.findChildViewById(rootView, id);
+      if (tvNoDevices == null) {
+        break missingId;
+      }
+
+      id = R.id.tvNoEvents;
+      TextView tvNoEvents = ViewBindings.findChildViewById(rootView, id);
+      if (tvNoEvents == null) {
         break missingId;
       }
 
@@ -71,7 +168,15 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentHomeBinding((ConstraintLayout) rootView, tvPlaceholder, tvTitle);
+      id = R.id.tvUptime;
+      TextView tvUptime = ViewBindings.findChildViewById(rootView, id);
+      if (tvUptime == null) {
+        break missingId;
+      }
+
+      return new FragmentHomeBinding((SwipeRefreshLayout) rootView, btnAddDevice, btnViewAllEvents,
+          cardReliability, rvDevices, rvRecentEvents, swipeRefresh, tvEventsCount, tvLastSync,
+          tvNoDevices, tvNoEvents, tvTitle, tvUptime);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

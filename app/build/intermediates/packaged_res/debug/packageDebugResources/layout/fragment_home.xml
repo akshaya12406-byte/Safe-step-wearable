@@ -1,32 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="@dimen/spacing_md">
+    android:background="@color/background">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_title"
-        android:textColor="@color/onBackground"
-        android:textSize="@dimen/text_headline_medium"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tvPlaceholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Device Cards and Metrics - Coming in Phase 4"
-        android:textColor="@color/onSurfaceMuted"
-        android:textSize="@dimen/text_body_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_md">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Header -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_lg"
+                android:text="@string/home_title"
+                android:textColor="@color/onBackground"
+                android:textSize="@dimen/text_headline_medium"
+                android:textStyle="bold" />
+
+            <!-- Reliability Metrics Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardReliability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_lg"
+                app:cardBackgroundColor="@color/cardBackground"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/cardBorder"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_md">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_md"
+                        android:text="@string/reliability_title"
+                        android:textColor="@color/onSurfaceMuted"
+                        android:textSize="@dimen/text_label"
+                        android:textAllCaps="true" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Events 24h -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvEventsCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorSecondary"
+                                android:textSize="@dimen/text_headline_small"
+                                android:textStyle="bold"
+                                tools:text="3" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/events_last_24h"
+                                android:textColor="@color/onSurfaceMuted"
+                                android:textSize="@dimen/text_body_small" />
+                        </LinearLayout>
+
+                        <!-- Uptime -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvUptime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/statusOnline"
+                                android:textSize="@dimen/text_headline_small"
+                                android:textStyle="bold"
+                                tools:text="99%" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/uptime"
+                                android:textColor="@color/onSurfaceMuted"
+                                android:textSize="@dimen/text_body_small" />
+                        </LinearLayout>
+
+                        <!-- Last Sync -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvLastSync"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/onBackground"
+                                android:textSize="@dimen/text_headline_small"
+                                android:textStyle="bold"
+                                tools:text="2m" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/last_sync"
+                                android:textColor="@color/onSurfaceMuted"
+                                android:textSize="@dimen/text_body_small" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Devices Section Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/devices_section"
+                    android:textColor="@color/onBackground"
+                    android:textSize="@dimen/text_title_medium"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddDevice"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_device"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="@dimen/text_body_small" />
+            </LinearLayout>
+
+            <!-- Device Cards RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_device_card" />
+
+            <!-- No Devices Placeholder -->
+            <TextView
+                android:id="@+id/tvNoDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:gravity="center"
+                android:text="@string/no_devices"
+                android:textColor="@color/onSurfaceMuted"
+                android:textSize="@dimen/text_body_medium"
+                android:visibility="gone" />
+
+            <!-- Recent Events Section Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/recent_events"
+                    android:textColor="@color/onBackground"
+                    android:textSize="@dimen/text_title_medium"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewAllEvents"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_all_events"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="@dimen/text_body_small" />
+            </LinearLayout>
+
+            <!-- Recent Events RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_event" />
+
+            <!-- No Events Placeholder -->
+            <TextView
+                android:id="@+id/tvNoEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:gravity="center"
+                android:text="@string/no_events"
+                android:textColor="@color/onSurfaceMuted"
+                android:textSize="@dimen/text_body_medium"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

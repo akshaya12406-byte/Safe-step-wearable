@@ -1,14 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Settings - Coming in Phase 6"
-        android:textColor="@color/onSurfaceMuted" />
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
 
-</FrameLayout>
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            android:text="@string/settings_title"
+            android:textColor="@color/onBackground"
+            android:textSize="@dimen/text_headline_medium"
+            android:textStyle="bold" />
+
+        <!-- Emergency Contact Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="@string/emergency_contact_section"
+            android:textColor="@color/onSurfaceMuted"
+            android:textSize="@dimen/text_label"
+            android:textAllCaps="true" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            app:cardBackgroundColor="@color/cardBackground"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/cardBorder"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/emergency_number_label"
+                    app:boxBackgroundColor="@color/surfaceVariant"
+                    app:hintTextColor="@color/onSurfaceMuted">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmergencyNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textColor="@color/onBackground"
+                        android:textSize="@dimen/text_body_large"
+                        tools:text="911" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Call Behavior Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="@string/call_behavior_section"
+            android:textColor="@color/onSurfaceMuted"
+            android:textSize="@dimen/text_label"
+            android:textAllCaps="true" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            app:cardBackgroundColor="@color/cardBackground"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/cardBorder"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <!-- Demo Mode Toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/demo_mode_label"
+                            android:textColor="@color/onBackground"
+                            android:textSize="@dimen/text_body_large" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/demo_mode_description"
+                            android:textColor="@color/onSurfaceMuted"
+                            android:textSize="@dimen/text_body_small" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchDemoMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="@dimen/spacing_sm"
+                    android:background="@color/cardBorder" />
+
+                <!-- Auto-Call Toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/auto_call_label"
+                            android:textColor="@color/onBackground"
+                            android:textSize="@dimen/text_body_large" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/auto_call_description"
+                            android:textColor="@color/onSurfaceMuted"
+                            android:textSize="@dimen/text_body_small" />
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchAutoCall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Devices Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="@string/device_section"
+            android:textColor="@color/onSurfaceMuted"
+            android:textSize="@dimen/text_label"
+            android:textAllCaps="true" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            app:cardBackgroundColor="@color/cardBackground"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/cardBorder"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPairDevice"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_device"
+                    android:textColor="@color/colorSecondary"
+                    app:strokeColor="@color/colorSecondary" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- About Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="@string/about_section"
+            android:textColor="@color/onSurfaceMuted"
+            android:textSize="@dimen/text_label"
+            android:textAllCaps="true" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            app:cardBackgroundColor="@color/cardBackground"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/cardBorder"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/version_label"
+                    android:textColor="@color/onBackground"
+                    android:textSize="@dimen/text_body_medium" />
+
+                <TextView
+                    android:id="@+id/tvVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/onSurfaceMuted"
+                    android:textSize="@dimen/text_body_medium"
+                    tools:text="1.0.0" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Save Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_medium"
+            android:text="@string/save_settings"
+            android:textSize="@dimen/text_body_large"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="@dimen/button_corner_radius_small" />
+
+    </LinearLayout>
+</ScrollView>
