@@ -29,169 +29,237 @@
                 android:textSize="@dimen/text_headline_medium"
                 android:textStyle="bold" />
 
-            <!-- Reliability Metrics Card -->
+            <!-- Posture Card (Primary) -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardReliability"
+                android:id="@+id/cardPosture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_md"
                 app:cardBackgroundColor="@color/cardBackground"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="0dp"
                 app:strokeColor="@color/cardBorder"
                 app:strokeWidth="1dp">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_md">
+
+                    <!-- Posture Icon -->
+                    <ImageView
+                        android:id="@+id/ivPostureIcon"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_posture_good"
+                        android:contentDescription="Posture Status"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/statusOnline" />
+
+                    <!-- Posture Label -->
+                    <TextView
+                        android:id="@+id/tvPostureLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:text="@string/posture_label"
+                        android:textColor="@color/onSurfaceMuted"
+                        android:textSize="@dimen/text_label"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toEndOf="@id/ivPostureIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Posture State -->
+                    <TextView
+                        android:id="@+id/tvPostureState"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textColor="@color/onBackground"
+                        android:textSize="@dimen/text_title_large"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivPostureIcon"
+                        app:layout_constraintTop_toBottomOf="@id/tvPostureLabel"
+                        tools:text="Good Posture" />
+
+                    <!-- Duration -->
+                    <TextView
+                        android:id="@+id/tvPostureDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textColor="@color/onSurfaceMuted"
+                        android:textSize="@dimen/text_body_medium"
+                        app:layout_constraintStart_toEndOf="@id/ivPostureIcon"
+                        app:layout_constraintTop_toBottomOf="@id/tvPostureState"
+                        tools:text="for 15 minutes" />
+
+                    <!-- Last Updated -->
+                    <TextView
+                        android:id="@+id/tvPostureUpdated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/onSurfaceMuted"
+                        android:textSize="@dimen/text_body_small"
+                        app:layout_constraintBottom_toBottomOf="@id/ivPostureIcon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="Updated 2m ago" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Device Status Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDeviceStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                app:cardBackgroundColor="@color/cardBackground"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/cardBorder"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_md">
+
+                    <!-- Status Indicator -->
+                    <View
+                        android:id="@+id/viewDeviceStatus"
+                        android:layout_width="@dimen/device_status_indicator_size"
+                        android:layout_height="@dimen/device_status_indicator_size"
+                        android:background="@drawable/bg_status_indicator"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Device Name -->
+                    <TextView
+                        android:id="@+id/tvDeviceName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:textColor="@color/onBackground"
+                        android:textSize="@dimen/text_title_medium"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/viewDeviceStatus"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="ESP32_01" />
+
+                    <!-- Device Status Text -->
+                    <TextView
+                        android:id="@+id/tvDeviceStatusText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textColor="@color/statusOnline"
+                        android:textSize="@dimen/text_body_small"
+                        app:layout_constraintStart_toEndOf="@id/viewDeviceStatus"
+                        app:layout_constraintTop_toBottomOf="@id/tvDeviceName"
+                        tools:text="Online" />
+
+                    <!-- Last Seen -->
+                    <TextView
+                        android:id="@+id/tvDeviceLastSeen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_sm"
+                        android:textColor="@color/onSurfaceMuted"
+                        android:textSize="@dimen/text_body_small"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvDeviceStatusText"
+                        app:layout_constraintStart_toEndOf="@id/tvDeviceStatusText"
+                        tools:text="• Last seen 2m ago" />
+
+                    <!-- Battery -->
+                    <TextView
+                        android:id="@+id/tvDeviceBattery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/onSurfaceMuted"
+                        android:textSize="@dimen/text_body_small"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="🔋 85%" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Last Fall Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardLastFall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_lg"
+                app:cardBackgroundColor="@color/alertSurface"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/alertPrimary"
+                app:strokeWidth="1dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_md">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_md"
+                    android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_md"
-                        android:text="@string/reliability_title"
-                        android:textColor="@color/onSurfaceMuted"
-                        android:textSize="@dimen/text_label"
-                        android:textAllCaps="true" />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_fall_alert"
+                        android:contentDescription="Fall Alert"
+                        app:tint="@color/alertPrimary" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:orientation="vertical">
 
-                        <!-- Events 24h -->
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:text="@string/last_fall_label"
+                            android:textColor="@color/onSurfaceMuted"
+                            android:textSize="@dimen/text_label"
+                            android:textAllCaps="true" />
 
-                            <TextView
-                                android:id="@+id/tvEventsCount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/colorSecondary"
-                                android:textSize="@dimen/text_headline_small"
-                                android:textStyle="bold"
-                                tools:text="3" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/events_last_24h"
-                                android:textColor="@color/onSurfaceMuted"
-                                android:textSize="@dimen/text_body_small" />
-                        </LinearLayout>
-
-                        <!-- Uptime -->
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tvLastFallTime"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_body_medium"
+                            tools:text="Jan 27, 3:45 PM" />
 
-                            <TextView
-                                android:id="@+id/tvUptime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/statusOnline"
-                                android:textSize="@dimen/text_headline_small"
-                                android:textStyle="bold"
-                                tools:text="99%" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/uptime"
-                                android:textColor="@color/onSurfaceMuted"
-                                android:textSize="@dimen/text_body_small" />
-                        </LinearLayout>
-
-                        <!-- Last Sync -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvLastSync"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/onBackground"
-                                android:textSize="@dimen/text_headline_small"
-                                android:textStyle="bold"
-                                tools:text="2m" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/last_sync"
-                                android:textColor="@color/onSurfaceMuted"
-                                android:textSize="@dimen/text_body_small" />
-                        </LinearLayout>
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvLastFallStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/statusOnline"
+                        android:textSize="@dimen/text_body_small"
+                        tools:text="Handled" />
+
                 </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Devices Section Header -->
+            <!-- Recent Events Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_sm"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/devices_section"
-                    android:textColor="@color/onBackground"
-                    android:textSize="@dimen/text_title_medium"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAddDevice"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_device"
-                    android:textColor="@color/colorSecondary"
-                    android:textSize="@dimen/text_body_small" />
-            </LinearLayout>
-
-            <!-- Device Cards RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvDevices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_device_card" />
-
-            <!-- No Devices Placeholder -->
-            <TextView
-                android:id="@+id/tvNoDevices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xl"
-                android:gravity="center"
-                android:text="@string/no_devices"
-                android:textColor="@color/onSurfaceMuted"
-                android:textSize="@dimen/text_body_medium"
-                android:visibility="gone" />
-
-            <!-- Recent Events Section Header -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_lg"
                 android:layout_marginBottom="@dimen/spacing_sm"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">

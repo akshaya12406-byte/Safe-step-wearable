@@ -4,6 +4,7 @@ package com.safestep.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,16 +24,19 @@ public final class FragmentHomeBinding implements ViewBinding {
   private final SwipeRefreshLayout rootView;
 
   @NonNull
-  public final MaterialButton btnAddDevice;
-
-  @NonNull
   public final MaterialButton btnViewAllEvents;
 
   @NonNull
-  public final MaterialCardView cardReliability;
+  public final MaterialCardView cardDeviceStatus;
 
   @NonNull
-  public final RecyclerView rvDevices;
+  public final MaterialCardView cardLastFall;
+
+  @NonNull
+  public final MaterialCardView cardPosture;
+
+  @NonNull
+  public final ImageView ivPostureIcon;
 
   @NonNull
   public final RecyclerView rvRecentEvents;
@@ -41,42 +45,76 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final SwipeRefreshLayout swipeRefresh;
 
   @NonNull
-  public final TextView tvEventsCount;
+  public final TextView tvDeviceBattery;
 
   @NonNull
-  public final TextView tvLastSync;
+  public final TextView tvDeviceLastSeen;
 
   @NonNull
-  public final TextView tvNoDevices;
+  public final TextView tvDeviceName;
+
+  @NonNull
+  public final TextView tvDeviceStatusText;
+
+  @NonNull
+  public final TextView tvLastFallStatus;
+
+  @NonNull
+  public final TextView tvLastFallTime;
 
   @NonNull
   public final TextView tvNoEvents;
 
   @NonNull
+  public final TextView tvPostureDuration;
+
+  @NonNull
+  public final TextView tvPostureLabel;
+
+  @NonNull
+  public final TextView tvPostureState;
+
+  @NonNull
+  public final TextView tvPostureUpdated;
+
+  @NonNull
   public final TextView tvTitle;
 
   @NonNull
-  public final TextView tvUptime;
+  public final View viewDeviceStatus;
 
   private FragmentHomeBinding(@NonNull SwipeRefreshLayout rootView,
-      @NonNull MaterialButton btnAddDevice, @NonNull MaterialButton btnViewAllEvents,
-      @NonNull MaterialCardView cardReliability, @NonNull RecyclerView rvDevices,
-      @NonNull RecyclerView rvRecentEvents, @NonNull SwipeRefreshLayout swipeRefresh,
-      @NonNull TextView tvEventsCount, @NonNull TextView tvLastSync, @NonNull TextView tvNoDevices,
-      @NonNull TextView tvNoEvents, @NonNull TextView tvTitle, @NonNull TextView tvUptime) {
+      @NonNull MaterialButton btnViewAllEvents, @NonNull MaterialCardView cardDeviceStatus,
+      @NonNull MaterialCardView cardLastFall, @NonNull MaterialCardView cardPosture,
+      @NonNull ImageView ivPostureIcon, @NonNull RecyclerView rvRecentEvents,
+      @NonNull SwipeRefreshLayout swipeRefresh, @NonNull TextView tvDeviceBattery,
+      @NonNull TextView tvDeviceLastSeen, @NonNull TextView tvDeviceName,
+      @NonNull TextView tvDeviceStatusText, @NonNull TextView tvLastFallStatus,
+      @NonNull TextView tvLastFallTime, @NonNull TextView tvNoEvents,
+      @NonNull TextView tvPostureDuration, @NonNull TextView tvPostureLabel,
+      @NonNull TextView tvPostureState, @NonNull TextView tvPostureUpdated,
+      @NonNull TextView tvTitle, @NonNull View viewDeviceStatus) {
     this.rootView = rootView;
-    this.btnAddDevice = btnAddDevice;
     this.btnViewAllEvents = btnViewAllEvents;
-    this.cardReliability = cardReliability;
-    this.rvDevices = rvDevices;
+    this.cardDeviceStatus = cardDeviceStatus;
+    this.cardLastFall = cardLastFall;
+    this.cardPosture = cardPosture;
+    this.ivPostureIcon = ivPostureIcon;
     this.rvRecentEvents = rvRecentEvents;
     this.swipeRefresh = swipeRefresh;
-    this.tvEventsCount = tvEventsCount;
-    this.tvLastSync = tvLastSync;
-    this.tvNoDevices = tvNoDevices;
+    this.tvDeviceBattery = tvDeviceBattery;
+    this.tvDeviceLastSeen = tvDeviceLastSeen;
+    this.tvDeviceName = tvDeviceName;
+    this.tvDeviceStatusText = tvDeviceStatusText;
+    this.tvLastFallStatus = tvLastFallStatus;
+    this.tvLastFallTime = tvLastFallTime;
     this.tvNoEvents = tvNoEvents;
+    this.tvPostureDuration = tvPostureDuration;
+    this.tvPostureLabel = tvPostureLabel;
+    this.tvPostureState = tvPostureState;
+    this.tvPostureUpdated = tvPostureUpdated;
     this.tvTitle = tvTitle;
-    this.tvUptime = tvUptime;
+    this.viewDeviceStatus = viewDeviceStatus;
   }
 
   @Override
@@ -106,27 +144,33 @@ public final class FragmentHomeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnAddDevice;
-      MaterialButton btnAddDevice = ViewBindings.findChildViewById(rootView, id);
-      if (btnAddDevice == null) {
-        break missingId;
-      }
-
       id = R.id.btnViewAllEvents;
       MaterialButton btnViewAllEvents = ViewBindings.findChildViewById(rootView, id);
       if (btnViewAllEvents == null) {
         break missingId;
       }
 
-      id = R.id.cardReliability;
-      MaterialCardView cardReliability = ViewBindings.findChildViewById(rootView, id);
-      if (cardReliability == null) {
+      id = R.id.cardDeviceStatus;
+      MaterialCardView cardDeviceStatus = ViewBindings.findChildViewById(rootView, id);
+      if (cardDeviceStatus == null) {
         break missingId;
       }
 
-      id = R.id.rvDevices;
-      RecyclerView rvDevices = ViewBindings.findChildViewById(rootView, id);
-      if (rvDevices == null) {
+      id = R.id.cardLastFall;
+      MaterialCardView cardLastFall = ViewBindings.findChildViewById(rootView, id);
+      if (cardLastFall == null) {
+        break missingId;
+      }
+
+      id = R.id.cardPosture;
+      MaterialCardView cardPosture = ViewBindings.findChildViewById(rootView, id);
+      if (cardPosture == null) {
+        break missingId;
+      }
+
+      id = R.id.ivPostureIcon;
+      ImageView ivPostureIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivPostureIcon == null) {
         break missingId;
       }
 
@@ -138,21 +182,39 @@ public final class FragmentHomeBinding implements ViewBinding {
 
       SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) rootView;
 
-      id = R.id.tvEventsCount;
-      TextView tvEventsCount = ViewBindings.findChildViewById(rootView, id);
-      if (tvEventsCount == null) {
+      id = R.id.tvDeviceBattery;
+      TextView tvDeviceBattery = ViewBindings.findChildViewById(rootView, id);
+      if (tvDeviceBattery == null) {
         break missingId;
       }
 
-      id = R.id.tvLastSync;
-      TextView tvLastSync = ViewBindings.findChildViewById(rootView, id);
-      if (tvLastSync == null) {
+      id = R.id.tvDeviceLastSeen;
+      TextView tvDeviceLastSeen = ViewBindings.findChildViewById(rootView, id);
+      if (tvDeviceLastSeen == null) {
         break missingId;
       }
 
-      id = R.id.tvNoDevices;
-      TextView tvNoDevices = ViewBindings.findChildViewById(rootView, id);
-      if (tvNoDevices == null) {
+      id = R.id.tvDeviceName;
+      TextView tvDeviceName = ViewBindings.findChildViewById(rootView, id);
+      if (tvDeviceName == null) {
+        break missingId;
+      }
+
+      id = R.id.tvDeviceStatusText;
+      TextView tvDeviceStatusText = ViewBindings.findChildViewById(rootView, id);
+      if (tvDeviceStatusText == null) {
+        break missingId;
+      }
+
+      id = R.id.tvLastFallStatus;
+      TextView tvLastFallStatus = ViewBindings.findChildViewById(rootView, id);
+      if (tvLastFallStatus == null) {
+        break missingId;
+      }
+
+      id = R.id.tvLastFallTime;
+      TextView tvLastFallTime = ViewBindings.findChildViewById(rootView, id);
+      if (tvLastFallTime == null) {
         break missingId;
       }
 
@@ -162,21 +224,47 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvPostureDuration;
+      TextView tvPostureDuration = ViewBindings.findChildViewById(rootView, id);
+      if (tvPostureDuration == null) {
+        break missingId;
+      }
+
+      id = R.id.tvPostureLabel;
+      TextView tvPostureLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvPostureLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.tvPostureState;
+      TextView tvPostureState = ViewBindings.findChildViewById(rootView, id);
+      if (tvPostureState == null) {
+        break missingId;
+      }
+
+      id = R.id.tvPostureUpdated;
+      TextView tvPostureUpdated = ViewBindings.findChildViewById(rootView, id);
+      if (tvPostureUpdated == null) {
+        break missingId;
+      }
+
       id = R.id.tvTitle;
       TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
       if (tvTitle == null) {
         break missingId;
       }
 
-      id = R.id.tvUptime;
-      TextView tvUptime = ViewBindings.findChildViewById(rootView, id);
-      if (tvUptime == null) {
+      id = R.id.viewDeviceStatus;
+      View viewDeviceStatus = ViewBindings.findChildViewById(rootView, id);
+      if (viewDeviceStatus == null) {
         break missingId;
       }
 
-      return new FragmentHomeBinding((SwipeRefreshLayout) rootView, btnAddDevice, btnViewAllEvents,
-          cardReliability, rvDevices, rvRecentEvents, swipeRefresh, tvEventsCount, tvLastSync,
-          tvNoDevices, tvNoEvents, tvTitle, tvUptime);
+      return new FragmentHomeBinding((SwipeRefreshLayout) rootView, btnViewAllEvents,
+          cardDeviceStatus, cardLastFall, cardPosture, ivPostureIcon, rvRecentEvents, swipeRefresh,
+          tvDeviceBattery, tvDeviceLastSeen, tvDeviceName, tvDeviceStatusText, tvLastFallStatus,
+          tvLastFallTime, tvNoEvents, tvPostureDuration, tvPostureLabel, tvPostureState,
+          tvPostureUpdated, tvTitle, viewDeviceStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

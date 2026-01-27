@@ -4,12 +4,12 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\menu\\bottom_nav_menu.xml"
     },
     {
-        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\drawable_bg_primary_badge.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\drawable\\bg_primary_badge.xml"
     },
     {
-        "merged": "com.safestep.app-debug-58:/drawable_bg_primary_badge.xml.flat",
-        "source": "com.safestep.app-main-60:/drawable/bg_primary_badge.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\drawable_ic_fall_alert.xml.flat",
@@ -20,8 +20,8 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\drawable\\ic_home.xml"
     },
     {
-        "merged": "com.safestep.app-debug-58:/layout_fragment_events.xml.flat",
-        "source": "com.safestep.app-main-60:/layout/fragment_events.xml"
+        "merged": "com.safestep.app-debug-58:/drawable_ic_posture_good.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_posture_good.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\layout_activity_event_history.xml.flat",
@@ -34,10 +34,6 @@
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\color_bottom_nav_color_selector.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\color\\bottom_nav_color_selector.xml"
-    },
-    {
-        "merged": "com.safestep.app-debug-58:/layout_item_event.xml.flat",
-        "source": "com.safestep.app-main-60:/layout/item_event.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\xml_data_extraction_rules.xml.flat",
@@ -60,12 +56,12 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_developer.xml"
     },
     {
-        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\drawable_ic_check.xml.flat",
-        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\drawable\\ic_check.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\drawable_bg_status_indicator.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\drawable\\bg_status_indicator.xml"
     },
     {
-        "merged": "com.safestep.app-debug-58:/layout_fragment_settings.xml.flat",
-        "source": "com.safestep.app-main-60:/layout/fragment_settings.xml"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\drawable_ic_check.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\drawable\\ic_check.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\drawable_ic_events.xml.flat",
@@ -76,16 +72,8 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.safestep.app-debug-58:/drawable_bg_status_indicator.xml.flat",
-        "source": "com.safestep.app-main-60:/drawable/bg_status_indicator.xml"
-    },
-    {
         "merged": "com.safestep.app-debug-58:/layout_fragment_home.xml.flat",
         "source": "com.safestep.app-main-60:/layout/fragment_home.xml"
-    },
-    {
-        "merged": "com.safestep.app-debug-58:/layout_item_device_card.xml.flat",
-        "source": "com.safestep.app-main-60:/layout/item_device_card.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\layout_fragment_settings.xml.flat",
@@ -100,8 +88,16 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_pairing.xml"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\layout_item_device_card.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\item_device_card.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\layout_fragment_home.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "com.safestep.app-debug-58:/drawable_ic_posture_bad.xml.flat",
+        "source": "com.safestep.app-main-60:/drawable/ic_posture_bad.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\layout_fragment_events.xml.flat",
@@ -122,10 +118,6 @@
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\xml_backup_rules.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-main-60:\\xml\\backup_rules.xml"
-    },
-    {
-        "merged": "com.safestep.app-debug-58:/layout_fragment_developer.xml.flat",
-        "source": "com.safestep.app-main-60:/layout/fragment_developer.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\9.0-milestone-1\\com.safestep.app-debug-58:\\layout_activity_alert.xml.flat",

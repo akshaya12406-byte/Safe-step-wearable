@@ -19,6 +19,10 @@
     <string name="events_last_24h">Events (24h)</string>
     <string name="uptime">Uptime</string>
     <string name="last_sync">Last Sync</string>
+    <string name="posture_label">Current Posture</string>
+    <string name="posture_good">Good Posture</string>
+    <string name="posture_bad">Poor Posture</string>
+    <string name="last_fall_label">Last Fall</string>
     
     <!-- Device Status -->
     <string name="status_online">Online</string>
