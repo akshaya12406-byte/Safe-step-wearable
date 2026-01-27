@@ -1,23 +1,16 @@
 /**
- * SafeStep ESP32 - Direct FCM Send Example
+ * SafeStep ESP32 - Cloudflare Worker Integration
  * 
- * This sketch demonstrates how to send FCM messages directly from ESP32 
- * using the FCM Legacy HTTP API (works with Firebase Spark plan).
+ * This sketch demonstrates how to send fall alerts from ESP32 
+ * to the SafeStep Android app via Cloudflare Worker relay.
  * 
- * HARDWARE REQUIREMENTS:
- * - ESP32 (any variant with WiFi)
- * - MPU6050 accelerometer (for fall detection - not shown here)
- * 
- * SECURITY WARNING:
- * Embedding the FCM server key in firmware is NOT secure for production.
- * For hackathon/prototype only. See README for production migration path.
+ * ARCHITECTURE:
+ * ESP32 → HTTPS → Cloudflare Worker → FCM HTTP v1 → Android App
  * 
  * SETUP:
  * 1. Replace WIFI_SSID and WIFI_PASSWORD with your network credentials
- * 2. Replace FCM_SERVER_KEY with your Firebase Cloud Messaging server key
- *    (Firebase Console → Project Settings → Cloud Messaging → Server Key)
- * 3. Replace FCM_TOPIC or DEVICE_TOKEN as needed
- * 4. Upload to ESP32
+ * 2. Replace WORKER_URL with your Cloudflare Worker URL
+ * 3. Upload to ESP32
  * 
  * Author: SafeStep Team
  * License: MIT
@@ -29,25 +22,17 @@
 #include <ArduinoJson.h>
 
 // ============== CONFIGURATION ==============
-// WiFi credentials
+// WiFi credentials - UPDATE THESE
 const char* WIFI_SSID = "YOUR_WIFI_SSID";
 const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
 
-// Firebase Cloud Messaging
-// Get from: Firebase Console → Project Settings → Cloud Messaging → Server Key
-const char* FCM_SERVER_KEY = "YOUR_FCM_SERVER_KEY_HERE";
+// Cloudflare Worker URL - PASTE YOUR WORKER URL HERE
+// Example: https://safestep-fcm.john-doe.workers.dev
+const char* WORKER_URL = "https://safestep-fcm.YOUR-SUBDOMAIN.workers.dev";
 
-// Send to topic (recommended) or specific device token
-const bool USE_TOPIC = true;
-const char* FCM_TOPIC = "caregiver";
-const char* DEVICE_TOKEN = "YOUR_DEVICE_TOKEN_HERE";  // Only if USE_TOPIC is false
-
-// Device identifier
+// Device identifier (must match Firestore path)
 const char* DEVICE_ID = "ESP32_01";
 const char* FIRMWARE_VERSION = "1.0.0";
-
-// FCM endpoint
-const char* FCM_URL = "https://fcm.googleapis.com/fcm/send";
 // ==========================================
 
 WiFiClientSecure wifiClient;
@@ -57,27 +42,44 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
   
-  Serial.println("\n=== SafeStep ESP32 FCM Sender ===");
+  Serial.println("\n");
+  Serial.println("╔══════════════════════════════════════╗");
+  Serial.println("║     SafeStep ESP32 FCM Sender        ║");
+  Serial.println("║   Cloudflare Worker Integration      ║");
+  Serial.println("╚══════════════════════════════════════╝");
   
   // Connect to WiFi
   connectWiFi();
   
-  // Skip TLS verification for simplicity (not recommended for production)
+  // Skip TLS certificate verification for simplicity
+  // In production, you should use proper certificate pinning
   wifiClient.setInsecure();
   
-  Serial.println("Ready to send FCM messages.");
-  Serial.println("Call sendFallAlert() to test.");
+  Serial.println("\n✅ Ready to send fall alerts!");
+  Serial.println("📍 Will send test alert in 5 seconds...\n");
   
   // Test: Send a fall alert after 5 seconds
   delay(5000);
-  sendFallAlert(3.05, 12.4, 5.1);
+  
+  Serial.println("🚨 Sending test fall alert...");
+  bool success = sendFallAlert(3.05, 12.4, 5.1);
+  
+  if (success) {
+    Serial.println("\n✅ Test complete! Check your Android device.");
+  } else {
+    Serial.println("\n❌ Test failed. Check configuration.");
+  }
 }
 
 void loop() {
-  // In real application:
+  // In a real application:
   // 1. Read MPU6050 accelerometer data
   // 2. Run fall detection algorithm
   // 3. If fall detected, call sendFallAlert()
+  
+  // Example: Simulate fall detection every 30 seconds for testing
+  // delay(30000);
+  // sendFallAlert(2.5, 10.0, 8.0);
   
   delay(1000);
 }
@@ -86,7 +88,7 @@ void loop() {
  * Connect to WiFi network
  */
 void connectWiFi() {
-  Serial.print("Connecting to WiFi: ");
+  Serial.print("📶 Connecting to WiFi: ");
   Serial.println(WIFI_SSID);
   
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -97,125 +99,125 @@ void connectWiFi() {
     Serial.print(".");
     attempts++;
   }
+  Serial.println();
   
   if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\nWiFi connected!");
-    Serial.print("IP: ");
+    Serial.println("✅ WiFi connected!");
+    Serial.print("   IP Address: ");
     Serial.println(WiFi.localIP());
   } else {
-    Serial.println("\nWiFi connection FAILED!");
+    Serial.println("❌ WiFi connection FAILED!");
+    Serial.println("   Check SSID and password");
   }
 }
 
 /**
- * Send fall alert via FCM
+ * Send fall alert via Cloudflare Worker
  * 
  * @param impactG Impact force in g
  * @param pitch Pitch angle in degrees
  * @param roll Roll angle in degrees
+ * @return true if successful, false otherwise
  */
-void sendFallAlert(float impactG, float pitch, float roll) {
+bool sendFallAlert(float impactG, float pitch, float roll) {
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("WiFi not connected!");
-    return;
+    Serial.println("❌ WiFi not connected!");
+    return false;
   }
   
-  Serial.println("\n📤 Sending FCM fall alert...");
+  // Check if Worker URL is configured
+  if (String(WORKER_URL).indexOf("YOUR-SUBDOMAIN") >= 0) {
+    Serial.println("❌ ERROR: WORKER_URL not configured!");
+    Serial.println("   Please update WORKER_URL in the code");
+    return false;
+  }
+  
+  Serial.println("\n📤 Sending fall alert to Cloudflare Worker...");
+  Serial.print("   URL: ");
+  Serial.println(WORKER_URL);
   
   // Build JSON payload
   StaticJsonDocument<512> doc;
-  
-  // Set destination
-  if (USE_TOPIC) {
-    String topicPath = String("/topics/") + FCM_TOPIC;
-    doc["to"] = topicPath;
-  } else {
-    doc["to"] = DEVICE_TOKEN;
-  }
-  
-  doc["priority"] = "high";
-  
-  // Data payload (critical for background delivery)
-  JsonObject data = doc.createNestedObject("data");
-  data["event_type"] = "FALL_CONFIRMED";
-  data["device_id"] = DEVICE_ID;
-  data["event_id"] = String("evt_") + String(millis());
-  data["timestamp"] = getISOTimestamp();
-  data["impact_g"] = String(impactG, 2);
-  data["pitch"] = String(pitch, 1);
-  data["roll"] = String(roll, 1);
-  data["firmware_version"] = FIRMWARE_VERSION;
+  doc["device_id"] = DEVICE_ID;
+  doc["event_type"] = "FALL_CONFIRMED";
+  doc["event_id"] = String("evt_") + String(millis());
+  doc["timestamp"] = getISOTimestamp();
+  doc["impact_g"] = impactG;
+  doc["pitch"] = pitch;
+  doc["roll"] = roll;
+  doc["firmware_version"] = FIRMWARE_VERSION;
   
   // Serialize to string
   String payload;
   serializeJson(doc, payload);
   
-  Serial.println("Payload:");
-  Serial.println(payload);
+  Serial.println("   Payload:");
+  Serial.println("   " + payload);
   
-  // Send HTTP POST
-  http.begin(wifiClient, FCM_URL);
+  // Send HTTP POST to Cloudflare Worker
+  http.begin(wifiClient, WORKER_URL);
   http.addHeader("Content-Type", "application/json");
-  http.addHeader("Authorization", String("key=") + FCM_SERVER_KEY);
+  http.setTimeout(10000); // 10 second timeout
   
   int httpCode = http.POST(payload);
   
+  bool success = false;
+  
   if (httpCode > 0) {
-    Serial.print("HTTP Response: ");
+    Serial.print("\n   HTTP Response Code: ");
     Serial.println(httpCode);
     
     String response = http.getString();
-    Serial.println("Response body:");
+    Serial.print("   Response: ");
     Serial.println(response);
     
     if (httpCode == 200) {
-      Serial.println("✅ FCM message sent successfully!");
+      Serial.println("\n✅ FCM alert sent successfully!");
+      success = true;
     } else {
-      Serial.println("⚠️ FCM returned non-200 status");
+      Serial.println("\n⚠️ Worker returned non-200 status");
     }
   } else {
-    Serial.print("❌ HTTP Error: ");
+    Serial.print("\n❌ HTTP Error: ");
     Serial.println(http.errorToString(httpCode));
+    
+    if (httpCode == -1) {
+      Serial.println("   Possible causes:");
+      Serial.println("   - Worker URL is incorrect");
+      Serial.println("   - Network connectivity issue");
+      Serial.println("   - SSL/TLS handshake failed");
+    }
   }
   
   http.end();
+  return success;
 }
 
 /**
- * Get current timestamp in ISO format (simplified)
- * Note: For accurate time, use NTP time synchronization
+ * Get current timestamp in ISO format
+ * Note: For accurate time, use NTP synchronization
  */
 String getISOTimestamp() {
-  // Simplified: returns millis-based timestamp
-  // In production, use NTP to get real time
-  unsigned long ms = millis();
-  return String("2026-01-27T") + 
-         String((ms / 3600000) % 24) + ":" +
-         String((ms / 60000) % 60) + ":" +
-         String((ms / 1000) % 60) + "Z";
+  // For prototype, we use a placeholder timestamp
+  // The server will use its own timestamp anyway
+  return "2026-01-28T00:00:00Z";
 }
 
 /**
- * Optional: Write event to Firestore REST API
+ * Write posture data to Firestore
+ * This is done separately via Firestore REST API
  * 
- * Note: This requires Firebase Auth or a service account token.
- * For prototype, the Android app writes to Firestore when it receives FCM.
- * This function is provided as a reference for direct Firestore writes.
+ * For posture updates, ESP32 writes directly to Firestore:
+ * devices/{device_id}/posture/latest
  */
-void writeToFirestore(float impactG, float pitch, float roll) {
-  // Firestore REST API endpoint:
-  // POST https://firestore.googleapis.com/v1/projects/{PROJECT_ID}/databases/(default)/documents/devices/{DEVICE_ID}/events
-  //
-  // This requires authentication (OAuth2 or Firebase Auth token).
-  // For prototype, we let the app write to Firestore when it receives the FCM.
-  //
-  // If you need direct ESP32→Firestore writes:
-  // 1. Use a Firebase service account
-  // 2. Generate a JWT from the service account
-  // 3. Send the JWT as Authorization header
-  //
-  // See: https://firebase.google.com/docs/firestore/use-rest-api
+void updatePosture(String state, int durationSeconds, float pitch, float roll) {
+  // Posture updates go to Firestore, not FCM
+  // This would use Firestore REST API with authentication
+  // For prototype, the Android app can simulate this data
   
-  Serial.println("Firestore direct write not implemented in prototype.");
-  Serial.println("The Android app writes events when it receives FCM.");
+  Serial.print("Posture update: ");
+  Serial.print(state);
+  Serial.print(" for ");
+  Serial.print(durationSeconds);
+  Serial.println(" seconds");
 }

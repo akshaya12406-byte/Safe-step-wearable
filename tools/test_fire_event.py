@@ -2,19 +2,16 @@
 """
 SafeStep Test Harness - Event Injection Script
 
-This script can:
-1. Send FCM messages directly to trigger app notifications
-2. Insert sample events into Firestore for testing
+This script sends fall alerts to the Cloudflare Worker relay,
+which forwards them to the Android app via FCM HTTP v1.
 
 USAGE:
-  python test_fire_event.py --fcm           # Send FCM notification
-  python test_fire_event.py --firestore     # Insert Firestore event
-  python test_fire_event.py --both          # Both
+  python test_fire_event.py --worker     # Send via Cloudflare Worker
+  python test_fire_event.py --firestore  # Insert Firestore event only
 
 SETUP:
-1. Replace FCM_SERVER_KEY with your Firebase Cloud Messaging server key
-2. For Firestore: Install firebase-admin and set GOOGLE_APPLICATION_CREDENTIALS
-3. Run: python test_fire_event.py --fcm
+1. Replace WORKER_URL with your Cloudflare Worker URL
+2. Run: python test_fire_event.py --worker
 
 Author: SafeStep Team
 """
@@ -27,18 +24,10 @@ import random
 import string
 
 # ============== CONFIGURATION ==============
-# FCM Server Key - Get from Firebase Console → Cloud Messaging
-FCM_SERVER_KEY = "YOUR_FCM_SERVER_KEY_HERE"
+# PASTE YOUR CLOUDFLARE WORKER URL HERE ↓
+WORKER_URL = "https://safestep-fcm.YOUR-SUBDOMAIN.workers.dev"
 
-# FCM endpoint
-FCM_URL = "https://fcm.googleapis.com/fcm/send"
-
-# Target: topic or device token
-USE_TOPIC = True
-FCM_TOPIC = "caregiver"
-DEVICE_TOKEN = "YOUR_DEVICE_TOKEN_HERE"  # Only if USE_TOPIC is False
-
-# Test device ID
+# Test device ID (must match what's in Firestore)
 DEVICE_ID = "ESP32_TEST"
 # ===========================================
 
@@ -49,66 +38,46 @@ def generate_event_id():
     return f"evt_{suffix}"
 
 
-def send_fcm_notification(event_type="FALL_CONFIRMED", impact_g=3.05, pitch=12.4, roll=5.1):
-    """Send FCM notification to trigger app alert."""
+def send_via_worker(event_type="FALL_CONFIRMED", impact_g=3.05, pitch=12.4, roll=5.1):
+    """Send fall alert via Cloudflare Worker."""
     
-    if FCM_SERVER_KEY == "YOUR_FCM_SERVER_KEY_HERE":
-        print("❌ Error: Please set FCM_SERVER_KEY in the script")
+    if "YOUR-SUBDOMAIN" in WORKER_URL:
+        print("❌ Error: Please set WORKER_URL in the script")
+        print("   Open test_fire_event.py and update the WORKER_URL constant")
         return False
     
-    # Build payload
     payload = {
-        "priority": "high",
-        "data": {
-            "event_type": event_type,
-            "device_id": DEVICE_ID,
-            "event_id": generate_event_id(),
-            "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "impact_g": str(impact_g),
-            "pitch": str(pitch),
-            "roll": str(roll)
-        }
+        "device_id": DEVICE_ID,
+        "event_type": event_type,
+        "event_id": generate_event_id(),
+        "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "impact_g": impact_g,
+        "pitch": pitch,
+        "roll": roll
     }
     
-    if USE_TOPIC:
-        payload["to"] = f"/topics/{FCM_TOPIC}"
-    else:
-        payload["to"] = DEVICE_TOKEN
-    
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"key={FCM_SERVER_KEY}"
-    }
-    
-    print(f"📤 Sending FCM message...")
-    print(f"   Target: {payload['to']}")
-    print(f"   Event Type: {event_type}")
-    print(f"   Impact: {impact_g}g")
+    print(f"📤 Sending to Cloudflare Worker...")
+    print(f"   URL: {WORKER_URL}")
     print(f"   Payload: {json.dumps(payload, indent=2)}")
     
     try:
-        response = requests.post(FCM_URL, json=payload, headers=headers)
+        response = requests.post(WORKER_URL, json=payload, timeout=10)
         
         print(f"\n📬 Response Status: {response.status_code}")
         print(f"   Response Body: {response.text}")
         
         if response.status_code == 200:
-            result = response.json()
-            if result.get("success", 0) >= 1:
-                print("\n✅ FCM message sent successfully!")
-                print("   Check your Android device for the full-screen alert.")
-                return True
-            else:
-                print("\n⚠️ Message sent but delivery failed.")
-                print("   Check if device token is correct or topic subscription exists.")
-                return False
-        elif response.status_code == 401:
-            print("\n❌ Authentication failed. Check your FCM_SERVER_KEY.")
-            return False
+            print("\n✅ Alert sent successfully!")
+            print("   Check your Android device for the full-screen alert.")
+            return True
         else:
-            print(f"\n❌ Failed with status {response.status_code}")
+            print(f"\n⚠️ Worker returned status {response.status_code}")
             return False
             
+    except requests.exceptions.ConnectionError:
+        print("\n❌ Connection Error: Cannot reach the worker")
+        print("   Check if the URL is correct")
+        return False
     except Exception as e:
         print(f"\n❌ Error: {e}")
         return False
@@ -168,9 +137,9 @@ def insert_firestore_event(event_type="FALL_CONFIRMED", impact_g=3.05, pitch=12.
 
 def main():
     parser = argparse.ArgumentParser(description="SafeStep Test Harness")
-    parser.add_argument("--fcm", action="store_true", help="Send FCM notification")
-    parser.add_argument("--firestore", action="store_true", help="Insert Firestore event")
-    parser.add_argument("--both", action="store_true", help="Send FCM and insert Firestore event")
+    parser.add_argument("--worker", action="store_true", help="Send via Cloudflare Worker (triggers FCM)")
+    parser.add_argument("--firestore", action="store_true", help="Insert Firestore event only")
+    parser.add_argument("--both", action="store_true", help="Send via worker AND insert Firestore event")
     parser.add_argument("--event-type", default="FALL_CONFIRMED", help="Event type (default: FALL_CONFIRMED)")
     parser.add_argument("--impact", type=float, default=3.05, help="Impact in g (default: 3.05)")
     parser.add_argument("--pitch", type=float, default=12.4, help="Pitch angle (default: 12.4)")
@@ -178,9 +147,13 @@ def main():
     
     args = parser.parse_args()
     
-    if not any([args.fcm, args.firestore, args.both]):
+    if not any([args.worker, args.firestore, args.both]):
         parser.print_help()
-        print("\n💡 Example: python test_fire_event.py --fcm")
+        print("\n" + "=" * 50)
+        print("💡 Quick Start:")
+        print("   1. Edit WORKER_URL in this file")
+        print("   2. Run: python test_fire_event.py --worker")
+        print("=" * 50)
         return
     
     print("=" * 50)
@@ -188,8 +161,8 @@ def main():
     print("=" * 50)
     print()
     
-    if args.fcm or args.both:
-        send_fcm_notification(args.event_type, args.impact, args.pitch, args.roll)
+    if args.worker or args.both:
+        send_via_worker(args.event_type, args.impact, args.pitch, args.roll)
         print()
     
     if args.firestore or args.both:
