@@ -47,9 +47,20 @@
             </intent-filter>
         </activity>
 
-        <!-- Full-Screen Alert Activity -->
+        <!-- Full-Screen Alert Activity (LEGACY XML) -->
         <activity
             android:name=".ui.AlertActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.SafeStep.Fullscreen" />
+        
+        <!-- Full-Screen Alert Activity (COMPOSE - NEW) -->
+        <activity
+            android:name=".ui.alert.AlertComposeActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:showOnLockScreen="true"

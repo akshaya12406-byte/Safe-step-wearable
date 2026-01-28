@@ -12,7 +12,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.safestep.app.R
-import com.safestep.app.ui.AlertActivity
+import com.safestep.app.ui.alert.AlertComposeActivity
 
 /**
  * SafeStepFirebaseService handles incoming FCM messages for fall detection alerts.
@@ -21,7 +21,7 @@ import com.safestep.app.ui.AlertActivity
  * - Parses data-only payloads (works in foreground and background)
  * - Creates high-priority notifications with full-screen intent
  * - Wakes device even when locked
- * - Passes event data to AlertActivity
+ * - Passes event data to AlertComposeActivity (Jetpack Compose UI)
  * 
  * FCM Payload expected format:
  * {
@@ -88,7 +88,7 @@ class SafeStepFirebaseService : FirebaseMessagingService() {
 
     /**
      * Creates and displays a high-priority notification with full-screen intent.
-     * This will wake the device and show AlertActivity even when locked.
+     * This will wake the device and show AlertComposeActivity even when locked.
      */
     private fun showEmergencyNotification(data: Map<String, String>) {
         val deviceId = data[KEY_DEVICE_ID] ?: "Unknown Device"
@@ -99,18 +99,18 @@ class SafeStepFirebaseService : FirebaseMessagingService() {
         val roll = data[KEY_ROLL] ?: ""
         val eventType = data[KEY_EVENT_TYPE] ?: EVENT_FALL_CONFIRMED
         
-        // Create intent for AlertActivity with all event data
-        val alertIntent = Intent(this, AlertActivity::class.java).apply {
+        // Create intent for AlertComposeActivity with all event data
+        val alertIntent = Intent(this, AlertComposeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or 
                     Intent.FLAG_ACTIVITY_CLEAR_TOP or
                     Intent.FLAG_ACTIVITY_SINGLE_TOP
-            putExtra(AlertActivity.EXTRA_DEVICE_ID, deviceId)
-            putExtra(AlertActivity.EXTRA_EVENT_ID, eventId)
-            putExtra(AlertActivity.EXTRA_TIMESTAMP, timestamp)
-            putExtra(AlertActivity.EXTRA_IMPACT_G, impactG)
-            putExtra(AlertActivity.EXTRA_PITCH, pitch)
-            putExtra(AlertActivity.EXTRA_ROLL, roll)
-            putExtra(AlertActivity.EXTRA_EVENT_TYPE, eventType)
+            putExtra(AlertComposeActivity.EXTRA_DEVICE_ID, deviceId)
+            putExtra(AlertComposeActivity.EXTRA_EVENT_ID, eventId)
+            putExtra(AlertComposeActivity.EXTRA_TIMESTAMP, timestamp)
+            putExtra(AlertComposeActivity.EXTRA_IMPACT_G, impactG)
+            putExtra(AlertComposeActivity.EXTRA_PITCH, pitch)
+            putExtra(AlertComposeActivity.EXTRA_ROLL, roll)
+            putExtra(AlertComposeActivity.EXTRA_EVENT_TYPE, eventType)
         }
 
         // Full-screen pending intent with immutable flag
