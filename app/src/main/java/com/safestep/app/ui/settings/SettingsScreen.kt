@@ -1,5 +1,6 @@
 package com.safestep.app.ui.settings
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -9,6 +10,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +28,7 @@ import com.safestep.app.ui.theme.SafeStepTheme
  * - Emergency contact
  * - Demo mode toggle
  * - Auto-call toggle
- * - Developer mode (hidden)
+ * - Developer mode (hidden behind 7-tap on version)
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,10 +40,41 @@ fun SettingsScreen(
     onEmergencyNumberChange: (String) -> Unit = {},
     onDemoModeToggle: (Boolean) -> Unit = {},
     onAutoCallToggle: (Boolean) -> Unit = {},
-    onVersionTap: () -> Unit = {}
+    onDeveloperModeUnlocked: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     var showEmergencyDialog by remember { mutableStateOf(false) }
     var tempEmergencyNumber by remember { mutableStateOf(emergencyNumber) }
+    
+    // 7-tap developer mode trigger
+    var tapCount by remember { mutableStateOf(0) }
+    var lastTapTime by remember { mutableStateOf(0L) }
+    
+    fun handleVersionTap() {
+        val currentTime = System.currentTimeMillis()
+        
+        // Reset if more than 2 seconds between taps
+        if (currentTime - lastTapTime > 2000) {
+            tapCount = 1
+        } else {
+            tapCount++
+        }
+        lastTapTime = currentTime
+        
+        when {
+            tapCount == 3 -> {
+                Toast.makeText(context, "4 more taps for developer mode", Toast.LENGTH_SHORT).show()
+            }
+            tapCount == 5 -> {
+                Toast.makeText(context, "2 more taps!", Toast.LENGTH_SHORT).show()
+            }
+            tapCount >= 7 -> {
+                Toast.makeText(context, "🔧 Developer mode unlocked!", Toast.LENGTH_SHORT).show()
+                tapCount = 0
+                onDeveloperModeUnlocked()
+            }
+        }
+    }
     
     Scaffold(
         topBar = {
@@ -74,7 +109,8 @@ fun SettingsScreen(
             SettingsCard(
                 title = "Emergency Number",
                 subtitle = emergencyNumber,
-                onClick = { showEmergencyDialog = true }
+                onClick = { showEmergencyDialog = true },
+                contentDesc = "Emergency number is $emergencyNumber. Tap to change."
             )
             
             Spacer(modifier = Modifier.height(24.dp))
@@ -88,7 +124,8 @@ fun SettingsScreen(
                 title = "Demo Mode",
                 subtitle = "Calls are simulated, not real",
                 isEnabled = isDemoMode,
-                onToggle = onDemoModeToggle
+                onToggle = onDemoModeToggle,
+                contentDesc = "Demo mode is ${if (isDemoMode) "enabled" else "disabled"}. When enabled, calls are simulated."
             )
             
             Spacer(modifier = Modifier.height(8.dp))
@@ -97,7 +134,8 @@ fun SettingsScreen(
                 title = "Auto-Call on Fall",
                 subtitle = "Automatically call after 30 seconds",
                 isEnabled = isAutoCallEnabled,
-                onToggle = onAutoCallToggle
+                onToggle = onAutoCallToggle,
+                contentDesc = "Auto call is ${if (isAutoCallEnabled) "enabled" else "disabled"}."
             )
             
             Spacer(modifier = Modifier.height(24.dp))
@@ -110,7 +148,8 @@ fun SettingsScreen(
             SettingsCard(
                 title = "Version",
                 subtitle = appVersion,
-                onClick = onVersionTap // Hidden developer mode trigger
+                onClick = { handleVersionTap() },
+                contentDesc = "App version $appVersion"
             )
             
             Spacer(modifier = Modifier.height(48.dp))
@@ -173,12 +212,14 @@ private fun SectionLabel(text: String) {
 private fun SettingsCard(
     title: String,
     subtitle: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    contentDesc: String = "$title: $subtitle"
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() },
+            .clickable { onClick() }
+            .semantics { contentDescription = contentDesc },
         shape = RoundedCornerShape(12.dp),
         color = SafeStepColors.Surface
     ) {
@@ -215,10 +256,13 @@ private fun SettingsToggleCard(
     title: String,
     subtitle: String,
     isEnabled: Boolean,
-    onToggle: (Boolean) -> Unit
+    onToggle: (Boolean) -> Unit,
+    contentDesc: String = "$title toggle"
 ) {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics { contentDescription = contentDesc },
         shape = RoundedCornerShape(12.dp),
         color = SafeStepColors.Surface
     ) {
