@@ -1,58 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Brand Colors -->
-    <color name="colorPrimary">#D32F2F</color>
-    <color name="colorPrimaryVariant">#B71C1C</color>
+    <!-- 
+         SafeStep Light Theme Color Palette
+         Designed for elderly users with high contrast and readability
+    -->
+    
+    <!-- Launcher Icon Background -->
+    <color name="ic_launcher_background">#1976D2</color>
+    
+    <!-- Primary Colors (Calm Blue - Trust & Safety) -->
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryVariant">#1565C0</color>
     <color name="colorOnPrimary">#FFFFFF</color>
     
-    <!-- Secondary Colors -->
-    <color name="colorSecondary">#FF9800</color>
-    <color name="colorSecondaryVariant">#F57C00</color>
-    <color name="colorOnSecondary">#000000</color>
+    <!-- Secondary Colors (Teal - Health & Wellness) -->
+    <color name="colorSecondary">#00897B</color>
+    <color name="colorSecondaryVariant">#00796B</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
     
-    <!-- Alert Colors (Emergency UI) -->
-    <color name="alertPrimary">#B71C1C</color>
-    <color name="alertBackground">#1A0000</color>
-    <color name="alertSurface">#2D0000</color>
+    <!-- Background (Light for readability) -->
+    <color name="background">#FAFAFA</color>
+    <color name="onBackground">#1C1C1E</color>
+    <color name="onBackgroundMuted">#6E6E73</color>
     
-    <!-- Status Colors -->
-    <color name="statusOnline">#2E7D32</color>
-    <color name="statusWarning">#FF9800</color>
-    <color name="statusOffline">#B71C1C</color>
-    <color name="statusUnknown">#757575</color>
-    
-    <!-- Dark Theme Base -->
-    <color name="background">#121212</color>
-    <color name="surface">#1E1E1E</color>
-    <color name="surfaceVariant">#2C2C2C</color>
-    <color name="onBackground">#FFFFFF</color>
-    <color name="onBackgroundMuted">#B0B0B0</color>
-    <color name="onSurface">#FFFFFF</color>
-    <color name="onSurfaceMuted">#9E9E9E</color>
+    <!-- Surface Colors -->
+    <color name="surface">#FFFFFF</color>
+    <color name="onSurface">#1C1C1E</color>
+    <color name="onSurfaceMuted">#8E8E93</color>
+    <color name="surfaceVariant">#F5F5F5</color>
     
     <!-- Card Colors -->
-    <color name="cardBackground">#1E1E1E</color>
-    <color name="cardBorder">#333333</color>
-    <color name="cardElevated">#262626</color>
-    
-    <!-- Action Colors -->
-    <color name="buttonCall">#FFFFFF</color>
-    <color name="buttonCallText">#B71C1C</color>
-    <color name="buttonAcknowledge">#2E7D32</color>
-    <color name="buttonDismiss">#424242</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="cardBorder">#E5E5EA</color>
     
     <!-- Bottom Navigation -->
-    <color name="bottomNavBackground">#1E1E1E</color>
-    <color name="bottomNavSelected">#FF5252</color>
-    <color name="bottomNavUnselected">#757575</color>
+    <color name="bottomNavBackground">#FFFFFF</color>
+    <color name="bottomNavSelected">#1976D2</color>
+    <color name="bottomNavUnselected">#8E8E93</color>
     
-    <!-- Legacy Support -->
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="ic_launcher_background">#D32F2F</color>
+    <!-- Alert Colors (High Contrast for Emergency) -->
+    <color name="alertPrimary">#D32F2F</color>
+    <color name="alertBackground">#B71C1C</color>
+    <color name="alertSurface">#FFEBEE</color>
+    <color name="alertOnSurface">#B71C1C</color>
+    
+    <!-- Status Colors (High Visibility) -->
+    <color name="statusOnline">#2E7D32</color>
+    <color name="statusWarning">#F57C00</color>
+    <color name="statusOffline">#C62828</color>
+    <color name="statusUnknown">#757575</color>
+    
+    <!-- Button Colors -->
+    <color name="buttonCall">#D32F2F</color>
+    <color name="buttonCallText">#FFFFFF</color>
+    <color name="buttonAcknowledge">#2E7D32</color>
+    <color name="buttonAcknowledgeText">#FFFFFF</color>
+    <color name="buttonSecondary">#E0E0E0</color>
+    <color name="buttonSecondaryText">#424242</color>
+    
+    <!-- Text Colors -->
+    <color name="textPrimary">#1C1C1E</color>
+    <color name="textSecondary">#636366</color>
+    <color name="textMuted">#8E8E93</color>
+    
+    <!-- Dividers & Borders -->
+    <color name="divider">#E5E5EA</color>
+    <color name="border">#D1D1D6</color>
+    
+    <!-- Basic Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    
+    <!-- Ripple -->
+    <color name="rippleColor">#1A1976D2</color>
 </resources>
