@@ -68,6 +68,9 @@ class AlertComposeActivity : ComponentActivity() {
         val emergencyNumber = prefs.getString(PREF_EMERGENCY_NUMBER, DEFAULT_EMERGENCY_NUMBER) 
             ?: DEFAULT_EMERGENCY_NUMBER
         
+        // Load elderly phone from prefs (can be set in Settings or from Firestore)
+        val elderlyPhone = prefs.getString("elderly_phone", "") ?: ""
+        
         setContent {
             SafeStepAlertTheme {
                 AlertScreen(
@@ -80,9 +83,9 @@ class AlertComposeActivity : ComponentActivity() {
                     eventId = eventId,
                     isDemoMode = isDemoMode,
                     emergencyNumber = emergencyNumber,
-                    onCallClick = { handleCallClick(isDemoMode, emergencyNumber) },
+                    onCallClick = { handleCallElderlyClick(isDemoMode, elderlyPhone, deviceId) },
                     onAcknowledgeClick = { handleAcknowledgeClick(deviceId, eventId) },
-                    onDismissClick = { handleDismissClick() }
+                    onDismissClick = { handleEmergencyClick(isDemoMode, emergencyNumber) }
                 )
             }
         }
@@ -108,36 +111,34 @@ class AlertComposeActivity : ComponentActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
     
-    private fun handleCallClick(isDemoMode: Boolean, emergencyNumber: String) {
+    /**
+     * Call the elderly person (CALL ELDERLY button)
+     */
+    private fun handleCallElderlyClick(isDemoMode: Boolean, elderlyPhone: String, deviceId: String) {
         if (isDemoMode) {
-            Toast.makeText(
-                this,
-                "Demo Mode: Would call $emergencyNumber",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(this, "Demo Mode: Would call elderly", Toast.LENGTH_LONG).show()
+            return
+        }
+        
+        val phoneNumber = if (elderlyPhone.isNotEmpty()) elderlyPhone else {
+            // Prompt user to set elderly phone in settings
+            Toast.makeText(this, "Set elderly phone number in Settings", Toast.LENGTH_LONG).show()
             return
         }
         
         // Check CALL_PHONE permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) 
             == PackageManager.PERMISSION_GRANTED) {
-            // Place call
             val callIntent = Intent(Intent.ACTION_CALL).apply {
-                data = Uri.parse("tel:$emergencyNumber")
+                data = Uri.parse("tel:$phoneNumber")
             }
             startActivity(callIntent)
         } else {
             // Open dialer instead
             val dialIntent = Intent(Intent.ACTION_DIAL).apply {
-                data = Uri.parse("tel:$emergencyNumber")
+                data = Uri.parse("tel:$phoneNumber")
             }
             startActivity(dialIntent)
-            
-            Toast.makeText(
-                this,
-                "Grant call permission in Settings for auto-dial",
-                Toast.LENGTH_LONG
-            ).show()
         }
     }
     
@@ -151,7 +152,7 @@ class AlertComposeActivity : ComponentActivity() {
                 .document(eventId)
                 .update(
                     mapOf(
-                        "handled" to true,
+                        "acknowledged" to true,
                         "acknowledged_by" to "caregiver_app",
                         "acknowledged_at" to com.google.firebase.Timestamp.now()
                     )
@@ -167,8 +168,27 @@ class AlertComposeActivity : ComponentActivity() {
         finish()
     }
     
-    private fun handleDismissClick() {
-        Toast.makeText(this, "Alert dismissed", Toast.LENGTH_SHORT).show()
-        finish()
+    /**
+     * Call emergency services (EMERGENCY button)
+     */
+    private fun handleEmergencyClick(isDemoMode: Boolean, emergencyNumber: String) {
+        if (isDemoMode) {
+            Toast.makeText(this, "Demo Mode: Would call $emergencyNumber", Toast.LENGTH_LONG).show()
+            return
+        }
+        
+        // Check CALL_PHONE permission
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) 
+            == PackageManager.PERMISSION_GRANTED) {
+            val callIntent = Intent(Intent.ACTION_CALL).apply {
+                data = Uri.parse("tel:$emergencyNumber")
+            }
+            startActivity(callIntent)
+        } else {
+            val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$emergencyNumber")
+            }
+            startActivity(dialIntent)
+        }
     }
 }

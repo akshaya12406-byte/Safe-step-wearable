@@ -325,36 +325,33 @@ private fun ActionButtons(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Primary: CALL button
+        // Primary: CALL ELDERLY button (caregiver calls the elderly person)
         LargePrimaryButton(
-            text = if (isDemoMode) "📞 SIMULATE CALL" else "📞 CALL $emergencyNumber",
+            text = if (isDemoMode) "📞 CALL ELDERLY (Demo)" else "📞 CALL ELDERLY",
             onClick = onCallClick,
             backgroundColor = SafeStepColors.ButtonCall,
-            contentDesc = if (isDemoMode) 
-                "Simulate emergency call, demo mode active" 
-            else 
-                "Call emergency number $emergencyNumber"
+            contentDesc = "Call the elderly person to check on them"
         )
         
-        // Secondary: ACKNOWLEDGE button
+        // Secondary: ACKNOWLEDGE button (mark as handled)
         LargePrimaryButton(
-            text = "✓ I AM SAFE",
+            text = "✓ ACKNOWLEDGE",
             onClick = onAcknowledgeClick,
             backgroundColor = SafeStepColors.ButtonAcknowledge,
-            contentDesc = "Acknowledge alert and mark as safe"
+            contentDesc = "Acknowledge alert and mark as handled"
         )
         
-        // Tertiary: Dismiss
-        SmallTextButton(
-            text = "Dismiss (False Alarm)",
+        // Tertiary: EMERGENCY 911 button
+        LargeOutlinedButton(
+            text = "🚨 EMERGENCY $emergencyNumber",
             onClick = onDismissClick,
-            textColor = Color.White.copy(alpha = 0.7f)
+            contentDesc = "Call emergency services $emergencyNumber"
         )
         
         // Demo mode indicator
         if (isDemoMode) {
             Text(
-                text = "Demo Mode Active — No real calls will be made",
+                text = "Demo Mode — No real calls will be made",
                 fontSize = 12.sp,
                 color = Color.White.copy(alpha = 0.5f),
                 textAlign = TextAlign.Center,

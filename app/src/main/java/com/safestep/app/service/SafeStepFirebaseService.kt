@@ -13,6 +13,8 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.safestep.app.R
 import com.safestep.app.ui.alert.AlertComposeActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * SafeStepFirebaseService handles incoming FCM messages for fall detection alerts.
@@ -158,11 +160,20 @@ class SafeStepFirebaseService : FirebaseMessagingService() {
 
     /**
      * Called when FCM token is refreshed.
-     * In production, this should update the server with the new token.
+     * Updates the token in Firestore for this caregiver.
      */
     override fun onNewToken(token: String) {
         Log.d(TAG, "FCM Token refreshed: $token")
-        // TODO: In production, send this token to your backend
-        // For prototype, token is displayed in Developer Mode
+        
+        // Update token in Firestore for this caregiver
+        kotlinx.coroutines.GlobalScope.launch {
+            try {
+                val caregiverRepo = com.safestep.app.data.CaregiverRepository(applicationContext)
+                caregiverRepo.updateFcmToken(token)
+                Log.d(TAG, "FCM Token updated in Firestore")
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to update FCM token in Firestore", e)
+            }
+        }
     }
 }
