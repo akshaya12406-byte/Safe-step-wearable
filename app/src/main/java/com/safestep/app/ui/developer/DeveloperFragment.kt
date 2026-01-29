@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.messaging.FirebaseMessaging
 import com.safestep.app.R
-import com.safestep.app.ui.AlertActivity
+import com.safestep.app.ui.alert.AlertComposeActivity
 
 /**
  * DeveloperFragment provides developer tools for testing.
@@ -103,16 +103,16 @@ class DeveloperFragment : Fragment() {
             }
         }
 
-        // Simulate event - directly opens AlertActivity
+        // Simulate event - directly opens AlertComposeActivity
         btnSimulateEvent.setOnClickListener {
-            val intent = Intent(requireContext(), AlertActivity::class.java).apply {
-                putExtra(AlertActivity.EXTRA_DEVICE_ID, "ESP32_DEMO")
-                putExtra(AlertActivity.EXTRA_EVENT_ID, "evt_test_${System.currentTimeMillis()}")
-                putExtra(AlertActivity.EXTRA_TIMESTAMP, java.time.Instant.now().toString())
-                putExtra(AlertActivity.EXTRA_IMPACT_G, "3.45")
-                putExtra(AlertActivity.EXTRA_PITCH, "15.2")
-                putExtra(AlertActivity.EXTRA_ROLL, "8.7")
-                putExtra(AlertActivity.EXTRA_EVENT_TYPE, "FALL_CONFIRMED")
+            val intent = Intent(requireContext(), AlertComposeActivity::class.java).apply {
+                putExtra(AlertComposeActivity.EXTRA_DEVICE_ID, "ESP32_DEMO")
+                putExtra(AlertComposeActivity.EXTRA_EVENT_ID, "evt_test_${System.currentTimeMillis()}")
+                putExtra(AlertComposeActivity.EXTRA_TIMESTAMP, java.time.Instant.now().toString())
+                putExtra(AlertComposeActivity.EXTRA_IMPACT_G, "3.45")
+                putExtra(AlertComposeActivity.EXTRA_PITCH, "15.2")
+                putExtra(AlertComposeActivity.EXTRA_ROLL, "8.7")
+                putExtra(AlertComposeActivity.EXTRA_EVENT_TYPE, "FALL_CONFIRMED")
             }
             startActivity(intent)
         }
