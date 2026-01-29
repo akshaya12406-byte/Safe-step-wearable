@@ -1,46 +1,52 @@
 package com.safestep.app.model
 
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.PropertyName
 
 /**
  * Posture data model representing current posture state from ESP32.
  * 
  * Firestore path: devices/{device_id}/posture/latest
  * 
- * The ESP32 updates this document whenever posture changes.
- * App reads it to display current posture status on dashboard.
+ * The ESP32/Worker writes these fields:
+ * - posture_state: "GOOD", "FAIR", "POOR"
+ * - pitch: Double
+ * - roll: Double
+ * - timestamp: String (ISO format)
+ * - updated_at: Timestamp
  */
 data class Posture(
-    val state: String = "",  // "GOOD", "BAD", "UNKNOWN"
-    val duration_seconds: Long = 0,  // How long in this state
-    val last_updated: Timestamp? = null,
+    @get:PropertyName("posture_state")
+    @set:PropertyName("posture_state")
+    var posture_state: String = "",
+    
     val pitch: Double = 0.0,
     val roll: Double = 0.0,
-    val confidence: Double = 0.0  // 0.0 to 1.0
+    val timestamp: String = "",
+    val updated_at: Timestamp? = null,
+    val device_id: String = ""
 ) {
+    // For backward compatibility
+    val state: String get() = posture_state
+    
     /**
      * Check if posture is good.
      */
-    fun isGood(): Boolean = state.equals("GOOD", ignoreCase = true)
+    fun isGood(): Boolean = posture_state.equals("GOOD", ignoreCase = true)
     
     /**
-     * Get human-readable duration.
+     * Get duration text (placeholder - ESP32 doesn't send duration).
      */
-    fun getDurationText(): String {
-        return when {
-            duration_seconds < 60 -> "${duration_seconds}s"
-            duration_seconds < 3600 -> "${duration_seconds / 60}m"
-            else -> "${duration_seconds / 3600}h ${(duration_seconds % 3600) / 60}m"
-        }
-    }
+    fun getDurationText(): String = "0s"
     
     /**
      * Get formatted state text.
      */
     fun getStateText(): String {
-        return when (state.uppercase()) {
+        return when (posture_state.uppercase()) {
             "GOOD" -> "Good Posture"
-            "BAD" -> "Poor Posture"
+            "FAIR" -> "Fair Posture"
+            "POOR", "BAD" -> "Poor Posture"
             else -> "Unknown"
         }
     }
@@ -49,7 +55,7 @@ data class Posture(
      * Get last updated as relative time.
      */
     fun getLastUpdatedText(): String {
-        val lastTime = last_updated?.toDate()?.time ?: return "Never"
+        val lastTime = updated_at?.toDate()?.time ?: return "Never"
         val now = System.currentTimeMillis()
         val diffSeconds = (now - lastTime) / 1000
         
@@ -59,4 +65,8 @@ data class Posture(
             else -> "${diffSeconds / 3600}h ago"
         }
     }
+    
+    // No-arg constructor required for Firestore deserialization
+    constructor() : this(posture_state = "")
 }
+

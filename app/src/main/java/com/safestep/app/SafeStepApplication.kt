@@ -4,11 +4,13 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.safestep.app.data.DeviceRepository
 
 class SafeStepApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
+        ensureDevicePaired()
     }
 
     private fun createNotificationChannel() {
@@ -28,4 +30,19 @@ class SafeStepApplication : Application() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+    
+    /**
+     * Ensure ESP32_01 is paired by default for demo/hackathon.
+     * This allows the dashboard to show data immediately without manual pairing.
+     */
+    private fun ensureDevicePaired() {
+        val deviceRepository = DeviceRepository(this)
+        val pairedDevices = deviceRepository.getPairedDeviceIds()
+        
+        // Auto-pair ESP32_01 if no devices are paired
+        if (pairedDevices.isEmpty()) {
+            deviceRepository.addPairedDevice("ESP32_01")
+        }
+    }
 }
+

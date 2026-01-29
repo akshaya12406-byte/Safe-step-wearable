@@ -30,12 +30,15 @@ class EventRepository {
     private val TAG = "EventRepository"
 
     /**
-     * Get recent events across all devices using collection group query.
-     * Returns up to [limit] events ordered by timestamp descending.
+     * Get recent events for ESP32_01 (default device).
+     * Uses direct device query instead of collectionGroup to avoid index requirement.
      */
     suspend fun getRecentEvents(limit: Long = 50): List<Event> {
         return try {
-            val snapshot = db.collectionGroup("events")
+            // Query events for ESP32_01 directly (no collectionGroup index needed)
+            val snapshot = db.collection("devices")
+                .document("ESP32_01")
+                .collection("events")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(limit)
                 .get()
@@ -45,7 +48,7 @@ class EventRepository {
                 try {
                     doc.toObject(Event::class.java)?.copy(
                         event_id = doc.id,
-                        device_id = doc.reference.parent.parent?.id ?: ""
+                        device_id = "ESP32_01"
                     )
                 } catch (e: Exception) {
                     Log.w(TAG, "Error parsing event document: ${doc.id}", e)

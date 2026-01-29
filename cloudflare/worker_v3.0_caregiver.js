@@ -231,7 +231,7 @@ async function getCaregiverTokens(env, deviceId) {
     const token = await getCachedAccessToken(env, "firestore");
     if (!token) throw new Error("Auth failed");
 
-    const url = `https://firestore.googleapis.com/v1/projects/${env.project_id}/databases/(default)/documents/devices/${deviceId}/recipients/caregivers`;
+    const url = `https://firestore.googleapis.com/v1/projects/${env.project_id}/databases/(default)/documents/devices/${deviceId}/caregivers`;
 
     const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` }
