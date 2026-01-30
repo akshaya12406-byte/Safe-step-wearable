@@ -3,20 +3,20 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <!-- Premium Alert-Style Poor Posture Icon -->
+    <!-- Simple slouched person silhouette for poor posture -->
     
-    <!-- Alert Circle Background -->
+    <!-- Head -->
     <path
-        android:fillColor="#FF6B35"
-        android:pathData="M12,2 C6.48,2 2,6.48 2,12 c0,5.52 4.48,10 10,10 c5.52,0 10,-4.48 10,-10 C22,6.48 17.52,2 12,2z" />
+        android:fillColor="#000000"
+        android:pathData="M10,4 m-2,0 a2,2 0,1,0 4,0 a2,2 0,1,0 -4,0" />
     
-    <!-- Exclamation Mark (White for contrast) -->
+    <!-- Slouched bent body and legs -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M11,7 h2 v7 h-2 z" />
+        android:fillColor="#000000"
+        android:pathData="M10,7.5 C8.62,7.5 7.5,8.62 7.5,10 L7.5,13 C7.5,13.55 7.78,14.05 8.22,14.34 L6.5,16.5 L6.5,20 C6.5,20.55 6.95,21 7.5,21 C8.05,21 8.5,20.55 8.5,20 L8.5,17 L9.5,15.5 L9.5,20 C9.5,20.55 9.95,21 10.5,21 C11.05,21 11.5,20.55 11.5,20 L11.5,14 L12.5,14 C13.05,14 13.5,13.55 13.5,13 L13.5,10 C13.5,8.62 12.38,7.5 11,7.5 L10,7.5 Z" />
     
-    <!-- Exclamation Dot -->
+    <!-- Warning exclamation mark -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M11,16 h2 v2 h-2 z" />
+        android:fillColor="#000000"
+        android:pathData="M18,16 L18,18 L20,18 L20,16 Z M18,10 L18,15 L20,15 L20,10 Z" />
 </vector>

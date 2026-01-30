@@ -3,11 +3,20 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Simple SafeStep icon: Shield with checkmark -->
+    <!-- SafeStep "Protected Steps" Icon: Footprint + Shield + Medical Cross -->
+    
+    <!-- Shield outline for safety/protection -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,24L24,36v18c0,16.2 12.8,31.4 30,36 17.2,-4.6 30,-19.8 30,-36V36L54,24z"/>
+        android:pathData="M54,20 L30,30 L30,48 C30,65 42,80 54,84 C66,80 78,65 78,48 L78,30 Z" />
+    
+    <!-- Footprint shape in center -->
     <path
-        android:fillColor="#D32F2F"
-        android:pathData="M44,54l6,6l14,-14l-3,-3l-11,11l-3,-3L44,54z"/>
+        android:fillColor="#1976D2"
+        android:pathData="M54,40 m-4,0 a4,5 0,1,0 8,0 a4,5 0,1,0 -8,0 Z M52,50 m-2.5,0 a2.5,3 0,1,0 5,0 a2.5,3 0,1,0 -5,0 Z M46,52 m-2,0 a2,2.5 0,1,0 4,0 a2,2.5 0,1,0 -4,0 Z M50,55 m-2,0 a2,2.5 0,1,0 4,0 a2,2.5 0,1,0 -4,0 Z M54,57 m-2,0 a2,2.5 0,1,0 4,0 a2,2.5 0,1,0 -4,0 Z M58,55 m-2,0 a2,2.5 0,1,0 4,0 a2,2.5 0,1,0 -4,0 Z M62,52 m-2,0 a2,2.5 0,1,0 4,0 a2,2.5 0,1,0 -4,0 Z" />
+    
+    <!-- Medical cross for health/care -->
+    <path
+        android:fillColor="#00BCD4"
+        android:pathData="M52,64 L52,72 L56,72 L56,64 L64,64 L64,60 L56,60 L56,52 L52,52 L52,60 L44,60 L44,64 Z" />
 </vector>
