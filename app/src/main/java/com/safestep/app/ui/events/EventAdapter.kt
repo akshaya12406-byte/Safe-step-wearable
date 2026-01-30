@@ -3,17 +3,20 @@ package com.safestep.app.ui.events
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Timestamp
 import com.safestep.app.R
 import com.safestep.app.model.Event
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 /**
- * RecyclerView adapter for displaying event cards.
+ * RecyclerView adapter for displaying premium event cards with badges.
  */
 class EventAdapter(
     private var events: List<Event> = emptyList(),
@@ -38,11 +41,14 @@ class EventAdapter(
     }
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val eventIconContainer: FrameLayout = itemView.findViewById(R.id.eventIconContainer)
         private val ivEventType: ImageView = itemView.findViewById(R.id.ivEventType)
         private val tvEventType: TextView = itemView.findViewById(R.id.tvEventType)
         private val tvDeviceId: TextView = itemView.findViewById(R.id.tvDeviceId)
         private val tvTimestamp: TextView = itemView.findViewById(R.id.tvTimestamp)
-        private val tvImpact: TextView = itemView.findViewById(R.id.tvImpact)
+        private val impactBadge: TextView = itemView.findViewById(R.id.impactBadge)
+        private val statusBanner: LinearLayout = itemView.findViewById(R.id.statusBanner)
+        private val ivStatusIcon: ImageView = itemView.findViewById(R.id.ivStatusIcon)
         private val tvHandledStatus: TextView = itemView.findViewById(R.id.tvHandledStatus)
 
         fun bind(event: Event, onEventClick: (Event) -> Unit) {
@@ -56,46 +62,58 @@ class EventAdapter(
             }
             tvEventType.text = eventTypeText
             
-            // Icon color based on event type
-            val iconColor = if (event.event_type == "FALL_CONFIRMED") {
-                R.color.alertPrimary
+            // Icon styling based on event type
+            if (event.event_type == "FALL_CONFIRMED") {
+                ivEventType.setImageResource(R.drawable.ic_fall_alert)
+                ivEventType.setColorFilter(ContextCompat.getColor(context, R.color.alertPrimary))
+                eventIconContainer.setBackgroundResource(R.drawable.bg_badge_attention)
             } else {
-                R.color.colorSecondary
+                ivEventType.setImageResource(R.drawable.ic_warning)
+                ivEventType.setColorFilter(ContextCompat.getColor(context, R.color.statusWarning))
+                eventIconContainer.setBackgroundResource(R.drawable.bg_badge_impact)
             }
-            ivEventType.setColorFilter(ContextCompat.getColor(context, iconColor))
             
             // Device ID
             tvDeviceId.text = event.device_id
             
-            // Timestamp
-            tvTimestamp.text = formatTimestamp(event.timestamp)
+            // Timestamp with bullet
+            tvTimestamp.text = "• ${formatTimestamp(event.timestamp)}"
             
-            // Impact
-            tvImpact.text = if (event.impact_g > 0) "${event.impact_g}g" else "—"
+            // Impact badge
+            if (event.impact_g > 0) {
+                impactBadge.visibility = View.VISIBLE
+                impactBadge.text = "${event.impact_g}g"
+            } else {
+                impactBadge.visibility = View.GONE
+            }
             
-            // Handled status
+            // Status banner styling
             if (event.handled) {
                 tvHandledStatus.text = context.getString(R.string.event_handled)
-                tvHandledStatus.setTextColor(ContextCompat.getColor(context, R.color.statusOnline))
+                tvHandledStatus.setTextColor(ContextCompat.getColor(context, R.color.badgeHandledText))
+                statusBanner.setBackgroundColor(ContextCompat.getColor(context, R.color.badgeHandledBackground))
+                ivStatusIcon.setImageResource(R.drawable.ic_check_circle)
+                ivStatusIcon.setColorFilter(ContextCompat.getColor(context, R.color.badgeHandledText))
             } else {
                 tvHandledStatus.text = context.getString(R.string.event_unhandled)
-                tvHandledStatus.setTextColor(ContextCompat.getColor(context, R.color.colorSecondary))
+                tvHandledStatus.setTextColor(ContextCompat.getColor(context, R.color.badgeAttentionText))
+                statusBanner.setBackgroundColor(ContextCompat.getColor(context, R.color.badgeAttentionBackground))
+                ivStatusIcon.setImageResource(R.drawable.ic_warning)
+                ivStatusIcon.setColorFilter(ContextCompat.getColor(context, R.color.badgeAttentionText))
             }
             
             // Click listener
             itemView.setOnClickListener { onEventClick(event) }
         }
 
-        private fun formatTimestamp(isoTimestamp: String): String {
-            if (isoTimestamp.isEmpty()) return "—"
+        private fun formatTimestamp(timestamp: Timestamp?): String {
+            if (timestamp == null) return "—"
             
             return try {
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
                 val outputFormat = SimpleDateFormat("MMM d, h:mm a", Locale.US)
-                val date = inputFormat.parse(isoTimestamp)
-                date?.let { outputFormat.format(it) } ?: isoTimestamp
+                outputFormat.format(timestamp.toDate())
             } catch (e: Exception) {
-                isoTimestamp.take(16) // Fallback: show first 16 chars
+                "—"
             }
         }
     }

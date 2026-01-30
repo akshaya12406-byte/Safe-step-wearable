@@ -1,34 +1,67 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     
-    <!-- Base Light Theme for Elderly Users -->
-    <style name="Theme.SafeStep" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color -->
+    <!-- Base Light Theme - Material 3 Style -->
+    <style name="Theme.SafeStep" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary Colors -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/colorPrimaryLight</item>
+        <item name="colorOnPrimaryContainer">@color/colorPrimary</item>
         
-        <!-- Secondary brand color -->
+        <!-- Secondary Colors -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryLight</item>
+        <item name="colorOnSecondaryContainer">@color/colorSecondary</item>
         
-        <!-- Background and surface -->
+        <!-- Background and Surface -->
         <item name="android:colorBackground">@color/background</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/onSurface</item>
+        <item name="colorSurfaceVariant">@color/surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/onSurfaceMuted</item>
         
-        <!-- Status bar (Light background) -->
+        <!-- Error -->
+        <item name="colorError">@color/alertPrimary</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorErrorContainer">@color/alertSurface</item>
+        <item name="colorOnErrorContainer">@color/alertOnSurface</item>
+        
+        <!-- Status Bar -->
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/bottomNavBackground</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         
-        <!-- Default text appearance (Dark on Light) -->
+        <!-- Default Text -->
         <item name="android:textColor">@color/onBackground</item>
+        
+        <!-- Material 3 Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.SafeStep.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.SafeStep.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.SafeStep.LargeComponent</item>
     </style>
     
-    <!-- Full Screen Alert Theme (Stay Dark/Red for Emergency) -->
-    <style name="Theme.SafeStep.Fullscreen" parent="Theme.MaterialComponents.NoActionBar">
+    <!-- Shape Appearances -->
+    <style name="ShapeAppearance.SafeStep.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.SafeStep.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.SafeStep.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+    
+    <!-- Full Screen Alert Theme (Emergency - stays dark/red) -->
+    <style name="Theme.SafeStep.Fullscreen" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:keepScreenOn">true</item>
         <item name="android:colorBackground">@color/alertBackground</item>
@@ -38,71 +71,122 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
     
-    <!-- Bottom Navigation Style -->
-    <style name="SafeStepBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+    <!-- Bottom Navigation Style (Material 3) -->
+    <style name="SafeStepBottomNavigation" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/bottomNavBackground</item>
         <item name="itemIconTint">@color/bottom_nav_color_selector</item>
         <item name="itemTextColor">@color/bottom_nav_color_selector</item>
         <item name="labelVisibilityMode">labeled</item>
         <item name="elevation">8dp</item>
+        <item name="itemActiveIndicatorStyle">@style/SafeStepNavIndicator</item>
     </style>
     
-    <!-- Card Style -->
-    <style name="SafeStepCard" parent="Widget.MaterialComponents.CardView">
+    <!-- Navigation Active Indicator (Material 3 Pill) -->
+    <style name="SafeStepNavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/bottomNavIndicator</item>
+        <item name="android:width">@dimen/bottom_nav_indicator_width</item>
+        <item name="android:height">@dimen/bottom_nav_indicator_height</item>
+    </style>
+    
+    <!-- Card Styles -->
+    <style name="SafeStepCard" parent="Widget.Material3.CardView.Elevated">
         <item name="cardBackgroundColor">@color/cardBackground</item>
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
-        <item name="cardElevation">2dp</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+    
+    <style name="SafeStepCard.Outlined" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/cardBackground</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">0dp</item>
         <item name="strokeColor">@color/cardBorder</item>
         <item name="strokeWidth">1dp</item>
     </style>
     
-    <!-- Primary Button (Call) - Large for Elderly -->
-    <style name="SafeStepButtonPrimary" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_height">@dimen/alert_button_height</item>
+    <style name="SafeStepCard.Posture" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/cardBackground</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius_large</item>
+        <item name="cardElevation">@dimen/card_elevation_elevated</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+    
+    <style name="SafeStepCard.Alert" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/alertSurface</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="strokeColor">@color/alertPrimary</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    
+    <!-- Primary Button (Call / Emergency) -->
+    <style name="SafeStepButtonPrimary" parent="Widget.Material3.Button">
+        <item name="android:layout_height">@dimen/button_height_large</item>
         <item name="android:textSize">@dimen/alert_button_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="backgroundTint">@color/buttonCall</item>
         <item name="android:textColor">@color/buttonCallText</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
     </style>
     
     <!-- Acknowledge Button (Green) -->
-    <style name="SafeStepButtonAcknowledge" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_height">@dimen/alert_button_height</item>
-        <item name="android:textSize">@dimen/alert_button_text_size</item>
+    <style name="SafeStepButtonAcknowledge" parent="Widget.Material3.Button">
+        <item name="android:layout_height">@dimen/button_height_medium</item>
+        <item name="android:textSize">@dimen/text_body_large</item>
         <item name="android:textStyle">bold</item>
         <item name="backgroundTint">@color/buttonAcknowledge</item>
         <item name="android:textColor">@color/buttonAcknowledgeText</item>
-        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="cornerRadius">@dimen/button_corner_radius_small</item>
     </style>
     
-    <!-- Secondary Button -->
-    <style name="SafeStepButtonSecondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textSize">@dimen/text_body_large</item>
-        <item name="android:textColor">@color/textSecondary</item>
-        <item name="strokeColor">@color/border</item>
+    <!-- Secondary Button (Outlined) -->
+    <style name="SafeStepButtonSecondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_height">@dimen/button_height_medium</item>
+        <item name="android:textSize">@dimen/text_body_medium</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="strokeColor">@color/buttonOutline</item>
+        <item name="cornerRadius">@dimen/button_corner_radius_small</item>
     </style>
     
-    <!-- Text Styles - Larger for Elderly -->
-    <style name="SafeStepTextHeadline" parent="TextAppearance.MaterialComponents.Headline4">
-        <item name="android:textSize">@dimen/text_headline_large</item>
+    <!-- Tonal Button (Filled Tonal) -->
+    <style name="SafeStepButtonTonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:layout_height">@dimen/button_height_small</item>
+        <item name="android:textSize">@dimen/text_body_medium</item>
+        <item name="cornerRadius">@dimen/button_corner_radius_small</item>
+    </style>
+    
+    <!-- Text Styles -->
+    <style name="SafeStepTextHeadline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">@dimen/text_headline_medium</item>
         <item name="android:textColor">@color/onBackground</item>
         <item name="android:textStyle">bold</item>
     </style>
     
-    <style name="SafeStepTextTitle" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="SafeStepTextTitle" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">@dimen/text_title_large</item>
         <item name="android:textColor">@color/onBackground</item>
     </style>
     
-    <style name="SafeStepTextBody" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="SafeStepTextBody" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textSize">@dimen/text_body_large</item>
         <item name="android:textColor">@color/textSecondary</item>
     </style>
     
-    <style name="SafeStepTextLabel" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="SafeStepTextLabel" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:textSize">@dimen/text_label</item>
         <item name="android:textColor">@color/textMuted</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    
+    <!-- Badge Styles -->
+    <style name="SafeStepBadge">
+        <item name="android:paddingStart">@dimen/badge_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/badge_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/badge_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/badge_padding_vertical</item>
+        <item name="android:textSize">@dimen/text_label</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

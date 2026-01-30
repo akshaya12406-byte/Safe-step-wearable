@@ -115,4 +115,23 @@
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    
+    <!-- Dashboard Redesign -->
+    <string name="greeting_caregiver">Keeping your loved ones safe</string>
+    
+    <!-- Posture Action Guidance -->
+    <string name="posture_action_poor">Please Sit Straight</string>
+    <string name="posture_action_good">Keep It Up!</string>
+    <string name="posture_status_good">Excellent Posture!</string>
+    <string name="posture_status_poor">Poor Posture Detected</string>
+    <string name="profile">Profile</string>
+    <string name="posture_status">Posture Status</string>
+    <string name="device">Device</string>
+    <string name="battery">Battery</string>
+    <string name="fall_alert">Fall Alert</string>
+    <string name="emergency_call">Emergency Call</string>
+    <string name="mark_handled">Mark Handled</string>
+    <string name="view_details">View Details</string>
+    <string name="all_clear">All Clear</string>
+    <string name="no_recent_falls">No falls detected recently</string>
 </resources>

@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Simpler, clearer alert-based poor posture icon -->
+    
+    <!-- Warning Triangle -->
+    <path
+        android:fillColor="#FF6B35"
+        android:pathData="M1,21 h22 L12,2 L1,21z M13,18 h-2 v-2 h2 v2z M13,14 h-2 v-4 h2 v4z" />
+    
+    <!-- Inner White for Contrast -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M11,10 h2 v4 h-2 z M11,16 h2 v2 h-2 z" />
+</vector>

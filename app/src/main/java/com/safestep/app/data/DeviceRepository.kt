@@ -23,7 +23,7 @@ import kotlinx.coroutines.tasks.await
  */
 class DeviceRepository(private val context: Context? = null) {
 
-    private val db = FirebaseFirestore.getInstance()
+    private val db by lazy { FirebaseFirestore.getInstance() }
     private val TAG = "DeviceRepository"
     
     companion object {

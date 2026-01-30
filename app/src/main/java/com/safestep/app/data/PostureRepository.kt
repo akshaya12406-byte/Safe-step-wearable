@@ -20,7 +20,7 @@ import kotlinx.coroutines.tasks.await
  */
 class PostureRepository {
 
-    private val db = FirebaseFirestore.getInstance()
+    private val db by lazy { FirebaseFirestore.getInstance() }
     private val TAG = "PostureRepository"
 
     /**

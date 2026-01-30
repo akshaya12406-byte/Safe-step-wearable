@@ -1,13 +1,22 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="56dp"
-    android:height="56dp"
+    android:width="24dp"
+    android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <!-- Bad posture person hunched -->
+    <!-- Premium Alert-Style Poor Posture Icon -->
+    
+    <!-- Alert Circle Background -->
     <path
-        android:fillColor="#F57C00"
-        android:pathData="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2Z"/>
+        android:fillColor="#FF6B35"
+        android:pathData="M12,2 C6.48,2 2,6.48 2,12 c0,5.52 4.48,10 10,10 c5.52,0 10,-4.48 10,-10 C22,6.48 17.52,2 12,2z" />
+    
+    <!-- Exclamation Mark (White for contrast) -->
     <path
-        android:fillColor="#F57C00"
-        android:pathData="M15,7L13,9L15,11V17H13V22H11V17H9V11C9,9.5 10,8.5 11,8L9,7C8,8 7,9.5 7,11V17H5V11C5,8 7,6 9.5,6L12,8L14.5,6C17,6 19,8 19,11V17H17V11L15,9L17,7L15,7Z"/>
+        android:fillColor="#FFFFFF"
+        android:pathData="M11,7 h2 v7 h-2 z" />
+    
+    <!-- Exclamation Dot -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M11,16 h2 v2 h-2 z" />
 </vector>

@@ -18,16 +18,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <!-- Bottom Navigation -->
+    <!-- Material 3 Bottom Navigation with Active Indicator -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
+        style="@style/SafeStepBottomNavigation"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_nav_height"
-        android:background="@color/bottomNavBackground"
         app:itemIconSize="@dimen/bottom_nav_icon_size"
-        app:itemIconTint="@color/bottom_nav_color_selector"
-        app:itemTextColor="@color/bottom_nav_color_selector"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

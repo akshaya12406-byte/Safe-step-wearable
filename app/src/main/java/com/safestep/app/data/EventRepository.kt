@@ -26,7 +26,7 @@ import kotlinx.coroutines.tasks.await
  */
 class EventRepository {
 
-    private val db = FirebaseFirestore.getInstance()
+    private val db by lazy { FirebaseFirestore.getInstance() }
     private val TAG = "EventRepository"
 
     /**
@@ -178,7 +178,7 @@ class EventRepository {
     /**
      * Mark an event as handled.
      */
-    fun markEventHandled(deviceId: String, eventId: String, acknowledgedBy: String = "app_user") {
+    suspend fun markEventHandled(deviceId: String, eventId: String, acknowledgedBy: String = "app_user") {
         db.collection("devices")
             .document(deviceId)
             .collection("events")
@@ -195,6 +195,13 @@ class EventRepository {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error marking event as handled", e)
             }
+    }
+    
+    /**
+     * Mark an event as handled (convenience method for ESP32_01).
+     */
+    suspend fun markEventAsHandled(eventId: String, acknowledgedBy: String = "app_user") {
+        markEventHandled("ESP32_01", eventId, acknowledgedBy)
     }
 
     /**

@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Alert-based Poor Posture Icon: Exclamation in Circle with Spine Warning -->
+    
+    <!-- Outer Circle (Alert Border) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF6B35"
+        android:strokeWidth="2"
+        android:pathData="M12,2 C6.48,2 2,6.48 2,12 c0,5.52 4.48,10 10,10 c5.52,0 10,-4.48 10,-10 C22,6.48 17.52,2 12,2z" />
+    
+    <!-- Exclamation Mark - Alert Symbol -->
+    <path
+        android:fillColor="#FF6B35"
+        android:pathData="M11,7 h2 v7 h-2 z" />
+    
+    <!-- Exclamation Dot -->
+    <path
+        android:fillColor="#FF6B35"
+        android:pathData="M11,16 h2 v2 h-2 z" />
+    
+    <!-- Subtle Spine/Posture Context (Slouched Figure) -->
+    <path
+        android:fillColor="#D45028"
+        android:fillAlpha="0.5"
+        android:pathData="M7,10 C7,9.5 7.2,9 7.5,8.5 L8.5,10 L9,9 C9.3,9 9.5,9.2 9.5,9.5 L10,11 L9.5,13 L10,15 C10,15.5 9.5,16 9,16 L8,16 C7.5,16 7,15.5 7,15 L7,10z" />
+</vector>

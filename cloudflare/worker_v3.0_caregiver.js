@@ -300,6 +300,7 @@ async function handleHeartbeat(request, env) {
 
 // ============================================================
 // POSTURE WRITE HANDLER
+// Now also updates device meta/info for online status tracking!
 // ============================================================
 async function handlePostureWrite(request, env) {
     try {
@@ -309,27 +310,55 @@ async function handlePostureWrite(request, env) {
         }
 
         const token = await getCachedAccessToken(env, "firestore");
-        const docPath = `devices/${body.device_id}/posture/latest`;
-        const url = `https://firestore.googleapis.com/v1/projects/${env.project_id}/databases/(default)/documents/${docPath}`;
+        const now = new Date().toISOString();
 
-        const doc = {
+        // ---- STEP 1: Write posture data ----
+        const posturePath = `devices/${body.device_id}/posture/latest`;
+        const postureUrl = `https://firestore.googleapis.com/v1/projects/${env.project_id}/databases/(default)/documents/${posturePath}`;
+
+        const postureDoc = {
             fields: {
                 device_id: { stringValue: body.device_id },
                 posture_state: { stringValue: body.posture_state },
                 pitch: { doubleValue: parseFloat(body.pitch) || 0 },
                 roll: { doubleValue: parseFloat(body.roll) || 0 },
-                timestamp: { timestampValue: body.timestamp || new Date().toISOString() },
-                updated_at: { timestampValue: new Date().toISOString() }
+                timestamp: { timestampValue: body.timestamp || now },
+                updated_at: { timestampValue: now }
             }
         };
 
-        const res = await fetch(url, {
+        const postureRes = await fetch(postureUrl, {
             method: "PATCH",
             headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-            body: JSON.stringify(doc)
+            body: JSON.stringify(postureDoc)
         });
 
-        return corsResponse(JSON.stringify({ success: res.ok, path: docPath }), res.ok ? 200 : 500);
+        // ---- STEP 2: Also update device meta/info for online status ----
+        // This ensures device shows "Online" whenever posture is being sent
+        const metaPath = `devices/${body.device_id}/meta/info`;
+        const metaUrl = `https://firestore.googleapis.com/v1/projects/${env.project_id}/databases/(default)/documents/${metaPath}`;
+
+        const metaDoc = {
+            fields: {
+                device_id: { stringValue: body.device_id },
+                name: { stringValue: body.device_id },
+                last_seen: { timestampValue: now },
+                battery_pct: { integerValue: parseInt(body.battery_pct) || -1 },
+                fw_version: { stringValue: body.fw_version || "" }
+            }
+        };
+
+        const metaRes = await fetch(metaUrl, {
+            method: "PATCH",
+            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+            body: JSON.stringify(metaDoc)
+        });
+
+        return corsResponse(JSON.stringify({
+            success: postureRes.ok,
+            posturePath: posturePath,
+            deviceStatusUpdated: metaRes.ok
+        }), postureRes.ok ? 200 : 500);
     } catch (e) {
         return corsResponse(JSON.stringify({ error: e.message }), 500);
     }

@@ -1,13 +1,17 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="56dp"
-    android:height="56dp"
+    android:width="24dp"
+    android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <!-- Good posture person standing straight -->
+    <!-- Premium Success-Style Good Posture Icon -->
+    
+    <!-- Success Circle Background -->
     <path
-        android:fillColor="#2E7D32"
-        android:pathData="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2Z"/>
+        android:fillColor="#4CAF50"
+        android:pathData="M12,2 C6.48,2 2,6.48 2,12 c0,5.52 4.48,10 10,10 c5.52,0 10,-4.48 10,-10 C22,6.48 17.52,2 12,2z" />
+    
+    <!-- Check Mark (White for contrast) -->
     <path
-        android:fillColor="#2E7D32"
-        android:pathData="M12,7C14.2,7 16,8.8 16,11V17H14V22H10V17H8V11C8,8.8 9.8,7 12,7Z"/>
+        android:fillColor="#FFFFFF"
+        android:pathData="M9,16.17 L5.83,13 l-1.42,1.41 L9,19 L19,9 l-1.41,-1.41 z" />
 </vector>

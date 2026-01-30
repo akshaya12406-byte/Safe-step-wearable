@@ -4,92 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/spacing_xs"
-    app:cardBackgroundColor="@color/cardBackground"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="0dp"
-    app:strokeColor="@color/cardBorder"
-    app:strokeWidth="1dp">
+    android:layout_marginVertical="@dimen/spacing_sm"
+    style="@style/SafeStepCard"
+    app:cardElevation="@dimen/card_elevation">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_md">
+        android:orientation="vertical">
 
-        <!-- Event Type Icon -->
-        <ImageView
-            android:id="@+id/ivEventType"
-            android:layout_width="@dimen/event_type_icon_size"
-            android:layout_height="@dimen/event_type_icon_size"
-            android:src="@drawable/ic_fall_alert"
-            android:contentDescription="Event"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/alertPrimary" />
-
-        <!-- Event Type -->
-        <TextView
-            android:id="@+id/tvEventType"
-            android:layout_width="0dp"
+        <!-- Main Content Row -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_md"
-            android:textColor="@color/onBackground"
-            android:textSize="@dimen/text_body_large"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/tvHandledStatus"
-            app:layout_constraintStart_toEndOf="@id/ivEventType"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Fall Detected" />
+            android:padding="@dimen/card_padding">
 
-        <!-- Handled Status Badge -->
-        <TextView
-            android:id="@+id/tvHandledStatus"
-            android:layout_width="wrap_content"
+            <!-- Event Type Icon -->
+            <FrameLayout
+                android:id="@+id/eventIconContainer"
+                android:layout_width="@dimen/event_type_icon_size"
+                android:layout_height="@dimen/event_type_icon_size"
+                android:background="@drawable/bg_badge_attention"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivEventType"
+                    android:layout_width="@dimen/icon_size_md"
+                    android:layout_height="@dimen/icon_size_md"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_fall_alert"
+                    android:contentDescription="@string/fall_alert"
+                    app:tint="@color/alertPrimary" />
+
+            </FrameLayout>
+
+            <!-- Event Type Text -->
+            <TextView
+                android:id="@+id/tvEventType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:textColor="@color/onBackground"
+                android:textSize="@dimen/text_body_large"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/impactBadge"
+                app:layout_constraintStart_toEndOf="@id/eventIconContainer"
+                app:layout_constraintTop_toTopOf="@id/eventIconContainer"
+                tools:text="Fall Detected" />
+
+            <!-- Device ID + Timestamp Row -->
+            <LinearLayout
+                android:id="@+id/metaRow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/eventIconContainer"
+                app:layout_constraintTop_toBottomOf="@id/tvEventType">
+
+                <TextView
+                    android:id="@+id/tvDeviceId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_body_small"
+                    tools:text="ESP32_01" />
+
+                <TextView
+                    android:id="@+id/tvTimestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:textColor="@color/textMuted"
+                    android:textSize="@dimen/text_body_small"
+                    tools:text="• Jan 29, 10:47 PM" />
+
+            </LinearLayout>
+
+            <!-- Impact Value Badge -->
+            <TextView
+                android:id="@+id/impactBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_badge_impact"
+                android:paddingHorizontal="@dimen/badge_padding_horizontal"
+                android:paddingVertical="@dimen/badge_padding_vertical"
+                android:textColor="@color/badgeImpactText"
+                android:textSize="@dimen/text_label"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="3.05g" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Status Footer Banner -->
+        <LinearLayout
+            android:id="@+id/statusBanner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/statusOnline"
-            android:textSize="@dimen/text_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Handled" />
+            android:background="@color/badgeAttentionBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/spacing_sm">
 
-        <!-- Device ID -->
-        <TextView
-            android:id="@+id/tvDeviceId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_md"
-            android:layout_marginTop="@dimen/spacing_xs"
-            android:textColor="@color/onSurfaceMuted"
-            android:textSize="@dimen/text_body_small"
-            app:layout_constraintStart_toEndOf="@id/ivEventType"
-            app:layout_constraintTop_toBottomOf="@id/tvEventType"
-            tools:text="ESP32_01" />
+            <ImageView
+                android:id="@+id/ivStatusIcon"
+                android:layout_width="@dimen/icon_size_sm"
+                android:layout_height="@dimen/icon_size_sm"
+                android:src="@drawable/ic_warning"
+                android:contentDescription="@string/event_unhandled"
+                app:tint="@color/badgeAttentionText" />
 
-        <!-- Timestamp -->
-        <TextView
-            android:id="@+id/tvTimestamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_md"
-            android:textColor="@color/onSurfaceMuted"
-            android:textSize="@dimen/text_body_small"
-            app:layout_constraintStart_toEndOf="@id/tvDeviceId"
-            app:layout_constraintTop_toBottomOf="@id/tvEventType"
-            tools:text="• Jan 27, 3:45 PM" />
+            <TextView
+                android:id="@+id/tvHandledStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:textColor="@color/badgeAttentionText"
+                android:textSize="@dimen/text_body_small"
+                android:textStyle="bold"
+                tools:text="Needs Attention" />
 
-        <!-- Impact Value -->
-        <TextView
-            android:id="@+id/tvImpact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/text_body_medium"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/ivEventType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvHandledStatus"
-            tools:text="3.05g" />
+        </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

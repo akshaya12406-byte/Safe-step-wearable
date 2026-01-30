@@ -12,7 +12,7 @@ import com.google.firebase.firestore.PropertyName
  * - posture_state: "GOOD", "FAIR", "POOR"
  * - pitch: Double
  * - roll: Double
- * - timestamp: String (ISO format)
+ * - timestamp: Timestamp (NOT String! Worker sends timestampValue)
  * - updated_at: Timestamp
  */
 data class Posture(
@@ -22,7 +22,10 @@ data class Posture(
     
     val pitch: Double = 0.0,
     val roll: Double = 0.0,
-    val timestamp: String = "",
+    
+    // CRITICAL: Worker sends this as timestampValue, NOT String!
+    val timestamp: Timestamp? = null,
+    
     val updated_at: Timestamp? = null,
     val device_id: String = ""
 ) {
@@ -55,9 +58,24 @@ data class Posture(
      * Get last updated as relative time.
      */
     fun getLastUpdatedText(): String {
-        val lastTime = updated_at?.toDate()?.time ?: return "Never"
+        val lastTime = updated_at?.toDate()?.time ?: timestamp?.toDate()?.time ?: return "Never"
         val now = System.currentTimeMillis()
         val diffSeconds = (now - lastTime) / 1000
+        
+        return when {
+            diffSeconds < 60 -> "Just now"
+            diffSeconds < 3600 -> "${diffSeconds / 60}m ago"
+            else -> "${diffSeconds / 3600}h ago"
+        }
+    }
+    
+    /**
+     * Get formatted timestamp for display.
+     */
+    fun getFormattedTimestamp(): String {
+        val time = timestamp?.toDate() ?: return "Unknown"
+        val now = System.currentTimeMillis()
+        val diffSeconds = (now - time.time) / 1000
         
         return when {
             diffSeconds < 60 -> "Just now"
@@ -69,4 +87,5 @@ data class Posture(
     // No-arg constructor required for Firestore deserialization
     constructor() : this(posture_state = "")
 }
+
 

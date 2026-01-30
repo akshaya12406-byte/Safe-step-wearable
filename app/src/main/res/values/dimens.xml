@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Spacing -->
+    <!-- 
+         SafeStep Premium Dimensions
+         Optimized for elderly users: larger touch targets, better spacing
+    -->
+    
+    <!-- Spacing (8dp grid system) -->
     <dimen name="spacing_xs">4dp</dimen>
     <dimen name="spacing_sm">8dp</dimen>
     <dimen name="spacing_md">16dp</dimen>
@@ -8,18 +13,22 @@
     <dimen name="spacing_xl">32dp</dimen>
     <dimen name="spacing_xxl">48dp</dimen>
     
-    <!-- Card Dimensions -->
-    <dimen name="card_corner_radius">12dp</dimen>
-    <dimen name="card_elevation">4dp</dimen>
+    <!-- Card Dimensions (Material 3 style) -->
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_corner_radius_large">24dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation_elevated">6dp</dimen>
     <dimen name="card_padding">16dp</dimen>
-    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_padding_large">20dp</dimen>
+    <dimen name="card_margin">12dp</dimen>
     
-    <!-- Button Dimensions -->
+    <!-- Button Dimensions (Accessibility: 48dp min touch target) -->
     <dimen name="button_height_large">72dp</dimen>
     <dimen name="button_height_medium">56dp</dimen>
-    <dimen name="button_height_small">40dp</dimen>
-    <dimen name="button_corner_radius">36dp</dimen>
-    <dimen name="button_corner_radius_small">20dp</dimen>
+    <dimen name="button_height_small">48dp</dimen>
+    <dimen name="button_corner_radius">28dp</dimen>
+    <dimen name="button_corner_radius_small">16dp</dimen>
+    <dimen name="button_min_width">120dp</dimen>
     
     <!-- Text Sizes (Accessibility: larger for elderly users) -->
     <dimen name="text_headline_large">32sp</dimen>
@@ -31,6 +40,16 @@
     <dimen name="text_body_medium">16sp</dimen>
     <dimen name="text_body_small">14sp</dimen>
     <dimen name="text_label">12sp</dimen>
+    <dimen name="text_caption">11sp</dimen>
+    
+    <!-- Icon Sizes -->
+    <dimen name="icon_size_xs">16dp</dimen>
+    <dimen name="icon_size_sm">20dp</dimen>
+    <dimen name="icon_size_md">24dp</dimen>
+    <dimen name="icon_size_lg">32dp</dimen>
+    <dimen name="icon_size_xl">48dp</dimen>
+    <dimen name="icon_size_xxl">64dp</dimen>
+    <dimen name="icon_size_hero">80dp</dimen>
     
     <!-- Alert Activity Specifics -->
     <dimen name="alert_title_size">40sp</dimen>
@@ -39,16 +58,43 @@
     <dimen name="alert_button_height">80dp</dimen>
     <dimen name="alert_icon_size">120dp</dimen>
     
-    <!-- Device Card -->
-    <dimen name="device_card_height">160dp</dimen>
-    <dimen name="device_card_icon_size">48dp</dimen>
-    <dimen name="device_status_indicator_size">12dp</dimen>
+    <!-- Posture Card -->
+    <dimen name="posture_icon_size">80dp</dimen>
+    <dimen name="posture_card_min_height">180dp</dimen>
     
-    <!-- Bottom Navigation -->
-    <dimen name="bottom_nav_height">64dp</dimen>
-    <dimen name="bottom_nav_icon_size">28dp</dimen>
+    <!-- Device Card -->
+    <dimen name="device_card_height">140dp</dimen>
+    <dimen name="device_card_icon_size">56dp</dimen>
+    <dimen name="device_status_indicator_size">14dp</dimen>
+    <dimen name="battery_progress_height">6dp</dimen>
+    <dimen name="battery_progress_width">100dp</dimen>
+    
+    <!-- Bottom Navigation (Material 3) -->
+    <dimen name="bottom_nav_height">80dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+    <dimen name="bottom_nav_indicator_height">32dp</dimen>
+    <dimen name="bottom_nav_indicator_width">64dp</dimen>
     
     <!-- Event Card -->
-    <dimen name="event_card_min_height">80dp</dimen>
-    <dimen name="event_type_icon_size">32dp</dimen>
+    <dimen name="event_card_min_height">100dp</dimen>
+    <dimen name="event_type_icon_size">40dp</dimen>
+    <dimen name="event_badge_height">28dp</dimen>
+    <dimen name="event_badge_corner_radius">14dp</dimen>
+    
+    <!-- Badge Dimensions -->
+    <dimen name="badge_height">24dp</dimen>
+    <dimen name="badge_corner_radius">12dp</dimen>
+    <dimen name="badge_padding_horizontal">12dp</dimen>
+    <dimen name="badge_padding_vertical">4dp</dimen>
+    
+    <!-- Status Indicator -->
+    <dimen name="status_dot_size">12dp</dimen>
+    <dimen name="status_dot_size_large">16dp</dimen>
+    
+    <!-- Divider -->
+    <dimen name="divider_height">1dp</dimen>
+    
+    <!-- Screen Padding -->
+    <dimen name="screen_padding_horizontal">20dp</dimen>
+    <dimen name="screen_padding_vertical">16dp</dimen>
 </resources>

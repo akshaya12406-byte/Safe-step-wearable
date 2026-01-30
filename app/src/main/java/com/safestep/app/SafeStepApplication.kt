@@ -36,13 +36,20 @@ class SafeStepApplication : Application() {
      * This allows the dashboard to show data immediately without manual pairing.
      */
     private fun ensureDevicePaired() {
-        val deviceRepository = DeviceRepository(this)
-        val pairedDevices = deviceRepository.getPairedDeviceIds()
-        
-        // Auto-pair ESP32_01 if no devices are paired
-        if (pairedDevices.isEmpty()) {
-            deviceRepository.addPairedDevice("ESP32_01")
-        }
+        Thread {
+            try {
+                val deviceRepository = DeviceRepository(this)
+                val pairedDevices = deviceRepository.getPairedDeviceIds()
+                
+                // Auto-pair ESP32_01 if no devices are paired
+                if (pairedDevices.isEmpty()) {
+                    deviceRepository.addPairedDevice("ESP32_01")
+                }
+            } catch (e: Exception) {
+                // Log error but don't crash app
+                android.util.Log.e("SafeStepApplication", "Failed to ensure device paired", e)
+            }
+        }.start()
     }
 }
 
