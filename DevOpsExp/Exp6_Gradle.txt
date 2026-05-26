@@ -1,0 +1,48 @@
+1.
+    mkdir SimpleApp
+    cd SimpleApp
+    mkdir src\main\java
+
+
+2.Create your Java file inside the src\main\java directory:
+
+    SimpleApp.java
+
+Code :
+
+public class SimpleApp {
+    public static void main(String[] args) {
+        System.out.println("Hello, Gradle!");
+    }
+}
+
+
+
+3.Create gradle.build
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'SimpleApp'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'SimpleApp'
+        )
+    }
+}
+
+
+4.Running
+
+    gradle clean build
+    gradle run

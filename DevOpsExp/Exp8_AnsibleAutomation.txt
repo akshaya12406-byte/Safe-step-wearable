@@ -1,0 +1,48 @@
+1.Install Ansible 
+
+    sudo apt update
+    sudo apt install ansible
+
+2. Create Dir
+
+    mkdir -p ~/ansible_workspace/roles/apache/tasks ~/ansible_workspace/roles/apache/handlers
+
+3. Create inventory.ini
+
+    nano inventory.ini
+
+Code: 
+
+[web_servers]
+localhost ansible_connection=local
+
+4.Create tasks
+
+    nano roles/apache/tasks/main.yml
+
+Code:
+
+- name: Install Apache Web Server
+  apt:
+    name: apache2
+    state: present
+  become: true
+
+
+4.Create site.yml
+
+    nano web.yml
+
+Code:
+
+- name: Deploy Infrastructure Configuration
+  hosts: web_servers
+  roles:
+    - apache
+
+
+5. Running
+
+    ansible-playbook -i inventory.ini site.yml -K
+
+6.Open localhost in chrome

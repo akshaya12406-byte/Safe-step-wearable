@@ -1,0 +1,64 @@
+1.Install Ansible 
+
+    sudo apt update
+    sudo apt install ansible
+
+2. Create Dir
+
+    mkdir ansible_ex6 && cd ansible_ex6
+
+3. Create inventory.ini
+
+    nano inventor.ini
+
+Code: 
+
+[web_servers]
+localhost ansible_connection=local
+
+[db_servers]
+localhost ansible_connection=local
+
+
+4.Create web.yml
+
+    nano web.yml
+
+Code:
+
+- name: Provision Web Application Infrastructure
+  hosts: web_servers  
+  become: true        
+
+  tasks:
+    - name: Install Apache Web Server
+      apt:
+        name: apache2
+        state: present 
+
+    - name: Ensure Apache Service is Running
+      service:
+        name: apache2
+        state: started 
+
+- name: Provision Database Server
+  hosts: db_servers   
+  become: true
+
+  tasks:
+    - name: Install MySQL Database Server
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Ensure MySQL Service is Running
+      service:
+        name: mysql
+        state: started
+
+
+5. Running
+
+    ansible-playbook -i inventory.ini web.yml -K
+
+6.Open localhost in chrome
