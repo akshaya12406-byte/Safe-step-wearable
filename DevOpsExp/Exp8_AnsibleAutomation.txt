@@ -6,6 +6,7 @@
 2. Create Dir
 
     mkdir -p ~/ansible_workspace/roles/apache/tasks ~/ansible_workspace/roles/apache/handlers
+	cd ~/ansible_workspace
 
 3. Create inventory.ini
 
@@ -31,7 +32,7 @@ Code:
 
 4.Create site.yml
 
-    nano web.yml
+    nano site.yml
 
 Code:
 
